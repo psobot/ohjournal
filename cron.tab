@@ -1,1 +1,1 @@
-*/5 * * * * /var/www/journal.petersobot.com/run.sh
+0       20      *       *       *       /path/to/folder/run.sh
