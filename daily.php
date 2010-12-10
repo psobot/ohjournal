@@ -1,3 +1,3 @@
 <?php
-	mail("test+ohjournal@gmail.com", "Test SMTP", "Message!");
+	mail("psobot+ohjournal@gmail.com", "Test SMTP", "Message!");
 ?>
