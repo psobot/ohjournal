@@ -1,0 +1,27 @@
+=== OhJournal === 
+An open-source replacement for the wonderful OhLife (www.ohlife.com) online diary/journal service.
+Created & Maintained: 	Peter Sobot <hi@petersobot.com>
+=================
+
+This script is definitely not very easy to set up... but here's some instructions
+Note: you'll need a Linux server with PHP5-CLI installed, and with the ability to send mail.
+Also, it's easiest to use this with a gmail account to properly filter your messages.
+
+1) Add a line to your crontab (by using crontab -e) to call:
+	/path/to/run.sh
+   whenever you want to recieve your email.
+   Make sure your server has the correct time zone!
+
+2) Configure mail.php with your email address
+3) Set up a Gmail filter to filter all emails coming in from "ohjournalresponse"
+	-	I have it set up to archive and mark as read, but you can do whatever you want with them.
+4) You're done!
+
+
+
+Major todos:
+	-	Add web interface
+	-	Actually add a reciever for your emails
+		-	e.g.: keep the responses local, rather than using your mail inbox as a database
+	-	Do a bunch of other cool stuff.
+	-	Plenty of work and UI and sexyness!
