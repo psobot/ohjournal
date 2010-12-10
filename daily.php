@@ -12,7 +12,7 @@
 	$saveEmail	=	"psobot+ohjournalresponse@gmail.com";	//the email you want to save your journal entries at
 	$subject	=	"It's " . date("l, F n") . " - How did your day go?";
 	$body		=	"Just respond to this email with your entry, and it will be saved automagically.";
-	$headers	=	'From: ohjournal@petersobot.com' . "\r\n" .
+	$headers	=	'From: OhJournal <ohjournal@petersobot.com>' . "\r\n" .
    					'Reply-To: ' . $saveEmail . "\r\n" .
     				'X-Mailer: PHP/' . phpversion();
 
