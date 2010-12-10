@@ -1,2 +1,2 @@
 #!/bin/sh
-php daily.php
+php /var/www/journal.petersobot.com/daily.php
