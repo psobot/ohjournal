@@ -12,7 +12,7 @@ Also, it's easiest to use this with a gmail account to properly filter your mess
    whenever you want to recieve your email.
    Make sure your server has the correct time zone!
 
-2) Configure mail.php with your email address
+2) Configure daily.php with your email address
 3) Set up a Gmail filter to filter all emails coming in from "ohjournalresponse"
 	-	I have it set up to archive and mark as read, but you can do whatever you want with them.
 4) You're done!
