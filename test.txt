@@ -1,0 +1,52 @@
+From psobot@gmail.com  Tue Jan 25 00:56:01 2011
+Return-Path: <psobot@gmail.com>
+X-Original-To: ohjournal@psobot.xen.prgmr.com
+Delivered-To: ohjournal@psobot.xen.prgmr.com
+Received: from mail-iy0-f182.google.com (mail-iy0-f182.google.com [209.85.210.182])
+	by psobot.xen.prgmr.com (Postfix) with ESMTPS id 80EC7301D0
+	for <ohjournal@psobot.xen.prgmr.com>; Tue, 25 Jan 2011 00:56:01 -0500 (EST)
+Received: by iyb26 with SMTP id 26so5022598iyb.27
+        for <ohjournal@psobot.xen.prgmr.com>; Mon, 24 Jan 2011 21:56:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=gamma;
+        h=domainkey-signature:content-type:mime-version:subject:from
+         :in-reply-to:date:content-transfer-encoding:message-id:references:to
+         :x-mailer;
+        bh=YNjmb86jJLzsBj7HOSz1ZTyptZKA49caGHcuD0XqQe4=;
+        b=ru+PtN51RHS1bVV9lVk5xyWdG/LxvxZLWGde5VZSqpk/VqEJoMVe+L9Hiz7tbCHkrF
+         zKuOkEGUTqxspzLKbGVG0XWU7IIe03QL4PHqTIUgwSdJJuIvDFAuV+Wp1a3KpX/oHT7/
+         y9Cx5KT63FOweQSzMLNALSm17ECIyRw2R9M34=
+DomainKey-Signature: a=rsa-sha1; c=nofws;
+        d=gmail.com; s=gamma;
+        h=content-type:mime-version:subject:from:in-reply-to:date
+         :content-transfer-encoding:message-id:references:to:x-mailer;
+        b=T0u9q+eojeZc3B3hqM27uCdO/vb8yA2n1jDILkhrrEr2SVKnC6buHD+xr3pTtf/fXS
+         cypXJ46Lz8U5Xj9v8VaG7WZXjti0qv5c2dSyJ28rplmkcAJTUWxrpyb46L9sPiDYM3n3
+         9ULfxJWcKLNKHZtpiNpJ1Ll7tzfgrDNINJFcs=
+Received: by 10.42.178.135 with SMTP id bm7mr6049711icb.101.1295934960838;
+        Mon, 24 Jan 2011 21:56:00 -0800 (PST)
+Received: from [192.168.1.104] (d24-141-250-42.home.cgocable.net [24.141.250.42])
+        by mx.google.com with ESMTPS id u5sm10483707ics.18.2011.01.24.21.55.59
+        (version=TLSv1/SSLv3 cipher=RC4-MD5);
+        Mon, 24 Jan 2011 21:55:59 -0800 (PST)
+Content-Type: text/plain; charset=us-ascii
+Mime-Version: 1.0 (Apple Message framework v1082)
+Subject: Re: It's Monday, January 24 - How did your day go?
+From: Peter Sobot <psobot@gmail.com>
+In-Reply-To: <20110125010002.C2D33301D1@psobot.xen.prgmr.com>
+Date: Tue, 25 Jan 2011 00:55:57 -0500
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <090FE172-A156-40F4-B190-4EA8D35469CE@gmail.com>
+References: <20110125010002.C2D33301D1@psobot.xen.prgmr.com>
+To: ohjournal@psobot.xen.prgmr.com
+X-Mailer: Apple Mail (2.1082)
+
+khaskgh!
+On Jan 24, 2011, at 8:00 PM, OhJournal wrote:
+
+> Just respond to this email with your entry, and it will be saved =
+automagically.
+
+
+
+
