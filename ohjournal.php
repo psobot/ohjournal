@@ -137,6 +137,7 @@
 		 */
 		public function addEntry(){
 			$raw = $this->getMail();
+			if(trim($raw) == "")	return false;
 			$data = $this->parseEmail($raw);
 			//$this->forward(Config::$forwardAddress, $data);
 			if($this->submitEntry($data[0], $data[1], $data[2], $data[3])){
