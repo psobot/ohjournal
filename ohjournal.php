@@ -92,7 +92,7 @@
 		 */
 		public function getMail(){
 			$data = file_get_contents(Config::$mailboxes.Config::$mailUser);
-			if($data == NULL || trim($data) == "")	Config::error("Mailbox is empty.");
+			if($data == NULL || trim($data) == "") return false;
 			return $data;
 		}
 
@@ -137,7 +137,7 @@
 		 */
 		public function addEntry(){
 			$raw = $this->getMail();
-			if(trim($raw) == "")	return false;
+			if(trim($raw) == "" || $raw == false)	return false;
 			$data = $this->parseEmail($raw);
 			//$this->forward(Config::$forwardAddress, $data);
 			if($this->submitEntry($data[0], $data[1], $data[2], $data[3])){
