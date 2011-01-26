@@ -156,7 +156,6 @@
 			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
 							'X-Mailer: OhJournal on PHP/' . phpversion();
-			var_dump(Config::$yourEmail, $subject, $body, $headers);
 			return mail(Config::$yourEmail, $subject, $body, $headers);
 		}
 	}
