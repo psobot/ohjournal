@@ -152,7 +152,7 @@
 			$body		=	"Just respond to this email with your entry, and it will be saved automagically.";
 			$past		= 	$this->getRandomEntry();
 			if($past != false)
-				$body .= "\r\n\r\n".Date_Difference::getStringResolved($past['received'])." (on ".date("l, F j, Y").") you wrote:\r\n".$past['entry'];
+				$body .= "\r\n\r\n\r\n".Date_Difference::getStringResolved($past['received'])." (on ".date("l, F j, Y").") you wrote:\r\n\r\n".$past['entry'];
 			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
 							'X-Mailer: OhJournal on PHP/' . phpversion();

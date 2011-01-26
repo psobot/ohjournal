@@ -1,6 +1,6 @@
 <?php
 	class Config{
-		public static $dbFile = "/journal.db";
+		public static $dbFile = "journal.db";
 		public static $tblEntries = "entries";
 
 		public static $yourEmail = "psobot+ohjournal@gmail.com";
