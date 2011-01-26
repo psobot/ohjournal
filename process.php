@@ -1,7 +1,7 @@
 <?php
 	$user = trim(shell_exec('whoami'));
 	$data = file_get_contents("/var/mail/$user");
-	if($data == NULL) die("Mailbox is empty.");
+	if($data == NULL || trim($data) == "") die("Mailbox is empty.");
 	$rawMessage = explode("\n\n", $data, 2);
 
 	$header = trim($rawMessage[0]);

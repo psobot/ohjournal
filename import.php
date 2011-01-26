@@ -16,10 +16,12 @@
 	 ********************************************************
 	 *
 	 */
-	date_default_timezone_set("America/Toronto");			//set your timezone here if this is incorrect
 
-	$f = file_get_contents("/var/www/journal.petersobot.com/ol.txt");
-	//var_dump($f);
+	require("./ohjournal.php");
+	date_default_timezone_set("America/Toronto");			//set your timezone here if this is incorrect
+	$j = new Journal(Config::$dbFile);
+
+	$f = file_get_contents("./ohlife_20101209.txt");
 	$lines = explode("\n", $f);
 	$lines[] = "9999-99-99";
 	$entries = array();
@@ -36,15 +38,21 @@
 	$entries = array_reverse($entries);
 
 	foreach($entries as $entry){
-		$date = strtotime($entry[0]);
+		$date = $entry[0];
 		unset($entry[0]);
-
-		$email		=	"youremail+ohliferesponse@gmail.com";	//the email you want to save your journal entries at
-		$subject	=	"Re: It's " . date("l, F j", $date) . " - How did your day go?";
-		$body		=	implode($entry, "\n") . "\n\n\n(imported from OhLife)";
-		$headers	=	'From: OhJournal Import <ohjournal@petersobot.com>' . "\r\n" .
-						'X-Mailer: PHP/' . phpversion();
-		mail($email, $subject, $body, $headers);
-		sleep(1);	//Delay to ensure all messages make it out properly.
+		$j->submitEntry(strtotime($date), strtotime($date), "Imported from OhLife text dump.", implode("\n", $entry));
 	}
+
+	$f = file_get_contents("own.txt");
+	$f = preg_replace("%=\n%", "", $f);
+	$entries = explode("From psobot@", $f);
+	$entries = array_reverse($entries);
+	foreach($entries as $entry){
+		if($entry != ""){
+			$entry = "From psobot@".$entry;
+			$entry = $j->parseEmail(trim($entry));
+			var_dump($j->submitEntry($entry[0], $entry[1], $entry[2], $entry[3]));
+		}
+	}
+
 ?>
