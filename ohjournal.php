@@ -43,7 +43,7 @@
 		public $db = null;
 
 		function __construct($database){
-			$this->db = new SQLite3($database);
+			$this->db = new SQLite3(dirname(__FILE__).$database);
 		}
 		function __destruct(){
 			$this->db->close();
@@ -162,7 +162,7 @@
 			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
 							'X-Mailer: OhJournal from user <'.trim(shell_exec("whoami")).'> on PHP/' . phpversion();
-			var_dump(Config::$yourEmail, $subject, $body, $headers);
+			//var_dump(Config::$yourEmail, $subject, $body, $headers);
 			return mail(Config::$yourEmail, $subject, $body, $headers);
 		}
 	}
