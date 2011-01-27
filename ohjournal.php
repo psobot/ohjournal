@@ -163,7 +163,7 @@
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
 							'X-Mailer: OhJournal from user <'.trim(shell_exec("whoami")).'> on PHP/' . phpversion();
 			var_dump(Config::$yourEmail, $subject, $body, $headers);
-			return ;//mail(Config::$yourEmail, $subject, $body, $headers);
+			return mail(Config::$yourEmail, $subject, $body, $headers);
 		}
 	}
 	$j = new Journal(Config::$dbFile);
