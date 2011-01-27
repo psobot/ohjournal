@@ -104,7 +104,7 @@
 		 *	Returns the raw source of the email.
 		 */
 		public function getMail(){
-			$data = file_get_contents(Config::$mailboxes.Config::$mailUser);
+			$data = file_get_contents(Config::$mailFile);
 			if($data == NULL || trim($data) == "") return false;
 			return $data;
 		}
@@ -139,7 +139,7 @@
 			$sendDate = strtotime($sendDate[1]." ".$sendDate[2]);
 
 			preg_match("%^([\s\S]+?)On .{3} \d{2}, \d{4}, at %", $body, $body);	//Remove previous email from what's being saved
-			$body = preg_replace("=\n", "", trim($body[1]));
+			$body = trim(preg_replace("/=[\n\r]+/", "", trim($body[1])));
 
 			return array($sendDate, $receiveDate, $header, $body);
 		}
