@@ -74,7 +74,6 @@
 		 *
 		 */
 		public function getRandomEntry(){
-			error_log(print_r($this->db, true));
 			$entry = $this->db->querySingle("select * from ".Config::$tblEntries." where reflected = 0 order by random() limit 1", true);
 			if($entry){
 				$this->db->query("update ".Config::$tblEntries." set reflected = 1 where id = ".$entry['id']);
