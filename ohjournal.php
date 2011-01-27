@@ -43,7 +43,7 @@
 		public $db = null;
 
 		function __construct($database){
-			$this->db = new SQLite3(dirname(__FILE__).$database);
+			$this->db = new SQLite3(dirname(__FILE__)."/".$database);
 		}
 		function __destruct(){
 			$this->db->close();
