@@ -156,7 +156,7 @@
 				$body .= 	"\r\n\r\n\r\n".
 							Date_Difference::getStringResolved($past['received']).
 							" (on ".
-							date("l, F j, Y", $past['received']).
+							date("l, F j, Y", strtotime($past['received'])).
 							") you wrote:\r\n\r\n".
 							$past['entry'];
 
