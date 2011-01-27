@@ -1,5 +1,18 @@
 <?php
+
 	require("config.php");
+	
+	class NumberToWord {
+		public static function toWords($number, $uppercase = false){
+			$numbers = array(	"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+				"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen");
+			if ($number > 0 && $number < 20)		$number = $numbers[$number];
+			else if ($number > 20 && $number < 30)	$number = "twenty-" . $numbers[$number-20]; 
+			else if ($number > 30 && $number < 40)$number = "thirty-" . $numbers[$number-30];  
+			return ($uppercase ? ucwords($number) : $number);
+		}
+	}
+
 	class Date_Difference {
 		/**
 		 *	Converts a timestamp to pretty human-readable format.
@@ -15,7 +28,7 @@
 			return self::getString(new DateTime($date), $compareTo); 
 		} 
 	
-		public static function getString(DateTime $date, DateTime $compareTo = NULL) { 
+		public static function getString(DateTime $date, DateTime $compareTo = NULL) {
 			if(is_null($compareTo))	$compareTo = new DateTime('now'); 
 			$diff = $compareTo->format('U') - $date->format('U'); 
 			$dayDiff = floor($diff / 86400); 
@@ -25,16 +38,16 @@
 			if($dayDiff == 0) { 
 				if($diff < 60) return 'just now'; 
 				elseif($diff < 120)	return '1 minute ago'; 
-				elseif($diff < 3600) return floor($diff/60) . ' minutes ago'; 
+				elseif($diff < 3600) return NumberToWord::toWords(floor($diff/60)) . ' minutes ago'; 
 				elseif($diff < 7200) return '1 hour ago'; 
-				elseif($diff < 86400) return floor($diff/3600) . ' hours ago'; 
+				elseif($diff < 86400) return NumberToWord::toWords(floor($diff/3600)) . ' hours ago'; 
 			} elseif($dayDiff == 1) return 'yesterday'; 
-			elseif($dayDiff < 7) return $dayDiff . ' days ago'; 
+			elseif($dayDiff < 7) return NumberToWord::toWords($dayDiff) . ' days ago'; 
 			elseif($dayDiff == 7) return '1 week ago'; 
-			elseif($dayDiff < (7*6)) return ceil($dayDiff/7) . ' weeks ago'; 
-			elseif($dayDiff < 365) return ceil($dayDiff/(365/12)) . ' months ago'; 
+			elseif($dayDiff < (7*6)) return "About " . NumberToWord::toWords(ceil($dayDiff/7)) . ' weeks ago'; 
+			elseif($dayDiff < 365) return "About " . NumberToWord::toWords(ceil($dayDiff/(365/12))) . ' months ago'; 
 			else { 
-				$years = round($dayDiff/365); 
+				$years =  NumberToWord::toWords(round($dayDiff/365)); 
 				return $years . ' year' . ($years != 1 ? 's' : '') . ' ago'; 
 			} 
 		} 
@@ -126,7 +139,7 @@
 			$sendDate = strtotime($sendDate[1]." ".$sendDate[2]);
 
 			preg_match("%^([\s\S]+?)On .{3} \d{2}, \d{4}, at %", $body, $body);	//Remove previous email from what's being saved
-			$body = trim($body[1]);
+			$body = preg_replace("=\n", "", trim($body[1]));
 
 			return array($sendDate, $receiveDate, $header, $body);
 		}
@@ -153,12 +166,13 @@
 			$past		= 	$this->getRandomEntry();
 			if($past != false)
 				$body .= 	"\r\n\r\n\r\n".
+							Config::$rememberText." ".
 							Date_Difference::getStringResolved($past['received']).
 							" (on ".
 							date("l, F j, Y", strtotime($past['received'])).
 							") you wrote:\r\n\r\n".
 							$past['entry'];
-
+			else $body .= "\r\n\r\n\r\nThere are no past journal entries to show you... so get writing!";
 			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
 							'X-Mailer: OhJournal from user <'.trim(shell_exec("whoami")).'> on PHP/' . phpversion();
