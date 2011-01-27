@@ -43,7 +43,6 @@
 		public $db = null;
 
 		function __construct($database){
-			echo "Running script as user ".shell_exec("whoami");
 			$this->db = new SQLite3($database);
 		}
 		function __destruct(){
@@ -75,6 +74,7 @@
 		 *
 		 */
 		public function getRandomEntry(){
+			error_log(print_r($this->db, true));
 			$entry = $this->db->querySingle("select * from ".Config::$tblEntries." where reflected = 0 order by random() limit 1", true);
 			if($entry){
 				$this->db->query("update ".Config::$tblEntries." set reflected = 1 where id = ".$entry['id']);
@@ -156,7 +156,7 @@
 				$body .= "\r\n\r\n\r\n".Date_Difference::getStringResolved($past['received'])." (on ".date("l, F j, Y", $past['received']).") you wrote:\r\n\r\n".$past['entry'];
 			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
-							'X-Mailer: OhJournal on PHP/' . phpversion();
+							'X-Mailer: OhJournal from user <'.trim(shell_exec("whoami")).'> on PHP/' . phpversion();
 			return mail(Config::$yourEmail, $subject, $body, $headers);
 		}
 	}
