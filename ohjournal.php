@@ -36,19 +36,19 @@
 			if(is_nan($dayDiff) || $dayDiff < 0) return ''; 
 					 
 			if($dayDiff == 0) { 
-				if($diff < 60) return 'just now'; 
-				elseif($diff < 120)	return '1 minute ago'; 
-				elseif($diff < 3600) return NumberToWord::toWords(floor($diff/60)) . ' minutes ago'; 
-				elseif($diff < 7200) return '1 hour ago'; 
-				elseif($diff < 86400) return NumberToWord::toWords(floor($diff/3600)) . ' hours ago'; 
-			} elseif($dayDiff == 1) return 'yesterday'; 
-			elseif($dayDiff < 7) return NumberToWord::toWords($dayDiff) . ' days ago'; 
-			elseif($dayDiff == 7) return '1 week ago'; 
-			elseif($dayDiff < (7*6)) return "About " . NumberToWord::toWords(ceil($dayDiff/7)) . ' weeks ago'; 
-			elseif($dayDiff < 365) return "About " . NumberToWord::toWords(ceil($dayDiff/(365/12))) . ' months ago'; 
+				if($diff < 60) return $diff.' seconds'; 
+				elseif($diff < 120)	return '1 minute'; 
+				elseif($diff < 3600) return NumberToWord::toWords(floor($diff/60)) . ' minutes'; 
+				elseif($diff < 7200) return '1 hour'; 
+				elseif($diff < 86400) return NumberToWord::toWords(floor($diff/3600)) . ' hours'; 
+			} elseif($dayDiff == 1) return 'yesterday';
+			elseif($dayDiff < 7) return NumberToWord::toWords($dayDiff) . ' days'; 
+			elseif($dayDiff == 7) return '1 week'; 
+			elseif($dayDiff < (7*6)) return "About " . NumberToWord::toWords(ceil($dayDiff/7)) . ' weeks'; 
+			elseif($dayDiff < 365) return "About " . NumberToWord::toWords(ceil($dayDiff/(365/12))) . ' months'; 
 			else { 
 				$years =  NumberToWord::toWords(round($dayDiff/365)); 
-				return $years . ' year' . ($years != 1 ? 's' : '') . ' ago'; 
+				return $years . ' year' . ($years != 1 ? 's' : ''); 
 			} 
 		} 
 	}
@@ -93,7 +93,17 @@
 				return $entry;
 			} else return false;
 		}
-
+		public function getAllEntries(){
+			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc");
+			while($row = $q->fetchArray()){
+				$row['difference'] = Date_Difference::getStringResolved($row['sent'], $row['received']) . " after send";
+				$row['received'] = date("l, F j\<\s\up\>S\</\s\up\> Y", strtotime($row['received']));
+				$row['sent'] = date("l, F j\<\s\up\>S\</\s\up\> Y", strtotime($row['sent']));
+				$row['entry'] = preg_replace("/[\n\r]/", "<br />", $row['entry']);
+				$rows[] = $row;
+			}
+			return $rows;
+		}
 		/*
 		 *	Gets latest mail by reading user's mail file
 		 *	Usually in /var/mail/username, but can be set in config
@@ -115,7 +125,7 @@
 		 *	Probably shouldn't be doing this. Could cause major problems.
 		 */
 		public function clearMail(){
-			$f = fopen(Config::$mailboxes.Config::$mailUser, 'w');
+			$f = fopen(Config::$mailFile, 'w');
 			fwrite($f, "");
 			fclose($f);
 			return (trim(file_get_contents(Config::$mailboxes.Config::$mailUser)) == "");
@@ -161,15 +171,15 @@
 
 		public function sendDaily(){
 			date_default_timezone_set("America/Toronto");				//set your timezone here if this is incorrect
-			$subject	=	"It's " . date("l, F j") . " - How did your day go?";
+			$subject	=	"It's " . date("l, F jS") . " - How did your day go?";
 			$body		=	"Just respond to this email with your entry, and it will be saved automagically.";
 			$past		= 	$this->getRandomEntry();
 			if($past != false)
 				$body .= 	"\r\n\r\n\r\n".
 							Config::$rememberText." ".
-							Date_Difference::getStringResolved($past['received']).
+							Date_Difference::getStringResolved($past['received']).' ago'.
 							" (on ".
-							date("l, F j, Y", strtotime($past['received'])).
+							date("l, F jS, Y", strtotime($past['received'])).
 							") you wrote:\r\n\r\n".
 							$past['entry'];
 			else $body .= "\r\n\r\n\r\nThere are no past journal entries to show you... so get writing!";
