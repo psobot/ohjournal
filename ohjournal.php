@@ -13,6 +13,10 @@
 		}
 	}
 
+	class Login {
+		
+	}
+
 	class Date_Difference {
 		/**
 		 *	Converts a timestamp to pretty human-readable format.
@@ -95,13 +99,12 @@
 		}
 		public function getAllEntries(){
 			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc");
-			while($row = $q->fetchArray()){
-				$row['difference'] = Date_Difference::getStringResolved($row['sent'], $row['received']) . " after send";
-				$row['received'] = date("l, F j\<\s\up\>S\</\s\up\> Y", strtotime($row['received']));
-				$row['sent'] = date("l, F j\<\s\up\>S\</\s\up\> Y", strtotime($row['sent']));
-				$row['entry'] = preg_replace("/[\n\r]/", "<br />", $row['entry']);
-				$rows[] = $row;
-			}
+			while($row = $q->fetchArray()){$rows[] = $row;}
+			return $rows;
+		}
+		public function getUniqueMonths(){
+			$q = $this->db->query("select sent from ".Config::$tblEntries." order by sent desc");
+			while($row = $q->fetchArray()){$rows[date("Y-n", strtotime($row['sent']))] = date("F Y", strtotime($row['sent']));}
 			return $rows;
 		}
 		/*
@@ -149,7 +152,7 @@
 			$sendDate = strtotime($sendDate[1]." ".$sendDate[2]);
 
 			preg_match("%^([\s\S]+?)On .{3} \d{2}, \d{4}, at %", $body, $body);	//Remove previous email from what's being saved
-			$body = trim(preg_replace("/=[\n\r]+/", "", trim($body[1])));
+			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($body[1]))));
 
 			return array($sendDate, $receiveDate, $header, $body);
 		}
