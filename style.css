@@ -1,0 +1,204 @@
+body{
+	background: #ccc;
+	font-family: 'Neuton';
+}
+::selection {				background: 	#df6262;	}
+::-moz-selection {			background: 	#df6262;	}
+textarea{					outline-color: 	#df6262; }
+textarea::selection {		background: 	#df6262; 	}
+textarea::-moz-selection 	{background: 	#df6262; 	}
+
+h2{
+	text-align: center;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #aaa;
+}
+h3{
+	text-align: center;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #aaa;
+}
+h4{
+	text-align: center;
+	font-weight: normal;
+}
+#menu{
+	position: fixed;
+	left: 20px;
+	top: 0px;
+	width: 140px;
+	display: block;
+	color: #fff;
+}
+#menu_content{
+	width: 130px;
+	display: block;
+	background: url("images/ribbon_01.png") bottom center no-repeat;
+	color: #fff;
+	margin: 0;
+	padding: 20px 0 0 10px;
+}
+#menu #logo h1{
+	text-indent: -1000px;
+	background: url("images/ohjournal.png") no-repeat;
+	height: 28px;
+	width: 106px;
+	display: block;
+	margin-left:6px;
+}
+#menu #items ul{
+	padding: 0;
+	margin: 0;
+}
+#menu #items ul li{
+	list-style-type: none;
+}
+#menu #items ul li a{
+	list-style-type: none;
+	width: 74px;
+	margin: 0 3px;
+	border-bottom: 1px solid #db0000;
+	padding: 5px 0 5px 40px;
+	display: block;
+	color: #fff;
+	text-decoration: none;
+}
+#menu #items ul li a:hover {
+	text-decoration: underline;
+}
+#menu #items ul li:first-child a{
+	border-top: 1px solid #db0000;
+}
+#menu #items ul li.write a		{background: url("images/pen.png") 8px 8px no-repeat;}
+#menu #items ul li.read a		{background: url("images/glass.png") 8px 8px no-repeat;}
+#menu #items ul li.settings a	{background: url("images/gear.png") 8px 8px no-repeat;}
+#menu #items ul li.lock a		{background: url("images/lock.png") 10px 8px no-repeat;}
+
+
+#menu #contact{
+	width: 100px;
+	padding: 10px;
+	font-size: 12px;
+	text-align: center;
+	margin-top: 50px;
+}
+#menu #contact a{
+	color: #fff;
+}
+#menu #footer{
+	background: url("images/ribbon_02.png") bottom center no-repeat;
+	display: block;
+	height: 130px;
+	width: 140px;
+}
+#content{
+	width: 700px;
+	margin: 0 auto;
+}
+
+#unlock{
+	margin: 0 auto;
+	text-align: center;
+}
+#unlock input{
+	font-family: 'Neuton';
+	display: block;
+	width: 250px;
+	height: 40px;
+	font-size: 20px;
+	margin: 5px auto;
+	text-align: center;
+	color: #ccc;
+}
+#unlock input[type=submit]{
+	color: #000;
+}
+
+textarea#body{
+	width: 700px;
+	height: 200px;
+	font-family: 'Neuton';
+}
+
+#jump {
+	text-align: center;
+	border-bottom: 1px solid #aaa;
+}
+#jump a{
+	color: #333;
+	text-decoration: none;
+	border-left: 1px solid #aaa;
+	display: inline;
+	padding: 0 10px;
+}
+#jump a:hover { text-decoration: underline; }
+#jump a.first { border-left: none; }
+
+
+.entry{
+	width: 100%;
+	margin: 8px auto;
+	word-wrap: break-word;
+	display: block;
+	background: #fff;
+	border: 1px solid #aaa;
+	border-radius: 6px;
+	position: relative;
+}
+.entry .bar{
+	display: block;
+	height: 29px;
+	padding: 3px;
+	text-align: center;
+	position: relative;
+}
+.entry .down {
+	background: url("images/down.png") bottom center no-repeat;
+	display: none;
+	height: 19px;
+	width: 14px;
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	z-index: 999;
+}
+.entry .up {
+	background: url("images/up.png") bottom center no-repeat;
+	display: none;
+	height: 19px;
+	width: 14px;
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	z-index: 999;
+}
+.entry .delete {
+	background: url("images/x_grey.png") bottom center no-repeat;
+	display: none;
+	height: 16px;
+	width: 16px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	z-index: 999;
+}
+.entry .bar:hover, .entry .arrow:hover, .entry .delete:hover {
+	cursor: hand;
+}
+.entry.active .bar:hover {	cursor: default;	}
+.entry .received {
+	color: #ccc;
+	position: absolute;
+	right: 10px;
+	font-size: 10px;
+	top: 8px;
+}
+.entry .sent{
+
+}
+.entry .body{
+	display: none;
+	padding: 10px;
+	border-top: 1px solid #ccc;
+	font-size: 14px;
+}

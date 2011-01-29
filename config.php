@@ -13,6 +13,9 @@
 		public static $fromEmail 	= "ohjournal@petersobot.com";
 
 		public static $rememberText	= "Hey, remember this?";
+		public static $emailDate	= "l, F jS, Y";
+
+		public static $webDate		= "l, F j\<\s\up\>S\</\s\up\>, Y";
 
 		public static function error(){
 			echo "Error!\n";

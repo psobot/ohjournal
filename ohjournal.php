@@ -127,15 +127,14 @@
 			return $rows;
 		}
 		/*
-		 *	Gets latest mail by reading user's mail file
+		 *	Gets latest mail to the user by reading user's mail file
 		 *	Usually in /var/mail/username, but can be set in config
 		 *	This is, by all accounts, a dirty hack
 		 *	Triggering an event on postfix receive is much, much better.
-		 *	This also currently assumes that only one email exists in the mail file.
 		 *
 		 *	Returns the raw source of the email.
 		 */
-		public function getMail(){
+		public function getMailFile(){
 			$data = file_get_contents(Config::$mailFile);
 			if($data == NULL || trim($data) == "") return false;
 			return $data;
@@ -145,14 +144,24 @@
 		 *	Clears out the user's mailbox file.
 		 *	Yes, you read that right.
 		 *	Probably shouldn't be doing this. Could cause major problems.
+		 *	Should change this to only delete the message passed in.
 		 */
-		public function clearMail(){
+		public function deleteMail($mail){
 			$f = fopen(Config::$mailFile, 'w');
 			fwrite($f, "");
 			fclose($f);
 			return (trim(file_get_contents(Config::$mailboxes.Config::$mailUser)) == "");
 		}
 
+		/*
+		 *	Grabs only the latest email from your email address.
+		 *	Could be improved by checking more in the headers for the string "ohJournal."
+		 *
+		 */
+		public function parseMailFile($raw){
+			$m = preg_match("/^From ".str_replace(".", "\.", Config::$yourEmail).".+([\s\S]+?)^From /", $raw, $matches);
+			return trim($matches[1]);
+		}
 
 		/*
 		 *	Parses raw email data for important fields.
@@ -181,11 +190,11 @@
 		 *
 		 */
 		public function addEntry(){
-			$raw = $this->getMail();
+			$raw = $this->parseMailFile($this->getMailFile());
 			if(trim($raw) == "" || $raw == false)	return false;
 			$data = $this->parseEmail($raw);
 			if($this->submitEntry($data[0], $data[1], $data[2], $data[3])){
-				$this->clearMail();
+				$this->deleteMail($raw);
 				return true;
 			}
 		}
