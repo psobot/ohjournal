@@ -1,8 +1,12 @@
 <?php
 	class Config{
+		public static $owner		= "Peter Sobot";
+
 		public static $dbFile 		= "journal.db";
 		public static $mailFile 	= "/var/mail/psobot";
+
 		public static $tblEntries 	= "entries";
+		public static $tblUser	 	= "user";
 
 		public static $yourEmail 	= "psobot+ohjournal@gmail.com";
 		public static $serverEmail 	= "ohjournal@psobot.xen.prgmr.com";

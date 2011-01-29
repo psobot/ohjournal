@@ -1,7 +1,7 @@
 <?php
-
+	session_start();
 	require("config.php");
-	
+	date_default_timezone_set("America/Toronto");
 	class NumberToWord {
 		public static function toWords($number, $uppercase = false){
 			$numbers = array(	"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
@@ -13,8 +13,8 @@
 		}
 	}
 
-	class Login {
-		
+	class Frontend {
+	//	public $
 	}
 
 	class Date_Difference {
@@ -57,13 +57,32 @@
 		} 
 	}
 	class Journal{
-		public $db = null;
+		private $db = null;
+		private $loggedIn = false;
 
 		function __construct($database){
-			$this->db = new SQLite3(dirname(__FILE__)."/".$database);
+			$this->db = $this->db($database);
 		}
 		function __destruct(){
-			$this->db->close();
+			$this->db()->close();
+		}
+		private function db($database = NULL){
+			if($database == NULL) $database = Config::$dbFile;
+			return new SQLite3(dirname(__FILE__)."/".$database);
+		}
+		public function login($username, $password){
+			$query = "select count(*) as login from ".Config::$tblUser." where username = '$username' and password = '".md5($password)."'";
+			$r = $this->db()->query($query);
+			$a = $r->fetchArray();
+			$this->loggedIn = $a[0] == true;
+			return $a[0] == true;
+		}
+		public function isLoggedIn(){
+			return $this->loggedIn;
+		}
+		public function protect(){
+			if(!$this->loggedIn) header("Location: ./");
+			return !$this->loggedIn;
 		}
 		/*
 		 *	Adds a Journal entry to the DB.
@@ -78,7 +97,7 @@
 										"'.htmlentities($header).'", 
 										"'.htmlentities($body).'",
 										0)';
-			$r = $this->db->query($query);
+			$r = $this->db()->query($query);
 			if ($r == false) var_dump($query);
 			return $r;
 		}
@@ -91,19 +110,19 @@
 		 *
 		 */
 		public function getRandomEntry(){
-			$entry = $this->db->querySingle("select * from ".Config::$tblEntries." where reflected = 0 order by random() limit 1", true);
+			$entry = $this->db()->querySingle("select * from ".Config::$tblEntries." where reflected = 0 order by random() limit 1", true);
 			if($entry){
-				$this->db->query("update ".Config::$tblEntries." set reflected = 1 where id = ".$entry['id']);
+				$this->db()->query("update ".Config::$tblEntries." set reflected = 1 where id = ".$entry['id']);
 				return $entry;
 			} else return false;
 		}
 		public function getAllEntries(){
-			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc");
+			$q = $this->db()->query("select * from ".Config::$tblEntries." order by sent desc");
 			while($row = $q->fetchArray()){$rows[] = $row;}
 			return $rows;
 		}
 		public function getUniqueMonths(){
-			$q = $this->db->query("select sent from ".Config::$tblEntries." order by sent desc");
+			$q = $this->db()->query("select sent from ".Config::$tblEntries." order by sent desc");
 			while($row = $q->fetchArray()){$rows[date("Y-n", strtotime($row['sent']))] = date("F Y", strtotime($row['sent']));}
 			return $rows;
 		}
@@ -165,7 +184,6 @@
 			$raw = $this->getMail();
 			if(trim($raw) == "" || $raw == false)	return false;
 			$data = $this->parseEmail($raw);
-			//$this->forward(Config::$forwardAddress, $data);
 			if($this->submitEntry($data[0], $data[1], $data[2], $data[3])){
 				$this->clearMail();
 				return true;
@@ -189,9 +207,12 @@
 			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
 							'X-Mailer: OhJournal from user <'.trim(shell_exec("whoami")).'> on PHP/' . phpversion();
-			//var_dump(Config::$yourEmail, $subject, $body, $headers);
 			return mail(Config::$yourEmail, $subject, $body, $headers);
 		}
 	}
-	$j = new Journal(Config::$dbFile);
+	if(isset($_SESSION['journal']))	$j = $_SESSION['journal'];
+	else {
+		$j = new Journal(Config::$dbFile);
+		$_SESSION['journal'] = $j;
+	}
 ?>
