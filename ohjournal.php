@@ -39,7 +39,7 @@
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
 			$r = $stmt->execute();
-			if ($r == false) var_dump($query, file_get_contents("journal.db"));
+			if ($r == false) var_dump($query);
 			return $r;
 		}
 
