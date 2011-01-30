@@ -17,6 +17,7 @@
 		public static $rememberText	= "Hey, remember this?";
 		public static $emailDate	= "l, F jS, Y";
 
+		public static $webRead		= false;
 		public static $webDate		= "l, F j\<\s\up\>S\</\s\up\>, Y";
 	}
 	class System{
@@ -53,7 +54,7 @@
 		 *	Probably shouldn't be doing this. Could cause major problems.
 		 *	Should change this to only delete the message passed in.
 		 */
-		public static function deleteMail($mail){
+		public static function deleteMail($mail = NULL){
 			$f = fopen(Config::$mailFile, 'w');
 			fwrite($f, "");
 			fclose($f);

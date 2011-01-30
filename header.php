@@ -17,7 +17,7 @@
 				<div id="items">
 					<ul>
 						<?php if($j->isLoggedIn()){ ?>
-						<li class="read"><a href="./read.php">read</a></li>
+						<?php if(Config::$webRead){ ?><li class="read"><a href="./read.php">read</a></li><?php } ?>
 						<li class="write"><a href="./write.php">write</a></li>
 						<li class="settings"><a href="./settings.php">settings</a></li>
 						<li class="lock"><a href="./lock.php">lock</a></li>

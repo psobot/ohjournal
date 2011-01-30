@@ -1,6 +1,6 @@
 <?php
 	require("ohjournal.php");
-	$j->protect();
+	$j->protect(Config::$webRead);
 	require("header.php");
 ?>
 <h2>Your Entries</h2>

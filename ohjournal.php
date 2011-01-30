@@ -16,19 +16,19 @@
 			if($database == NULL) $database = Config::$dbFile;
 			return new SQLite3(dirname(__FILE__)."/".$database);
 		}
-		public function login($username, $password){
-			$query = "select count(*) as login from ".Config::$tblUser." where username = '$username' and password = '".md5($password)."'";
+		public function login($password){
+			$query = "select count(*) as login from ".Config::$tblUser." where password = '".md5($password)."'";
 			$r = $this->db()->query($query);
 			$a = $r->fetchArray();
-			$this->loggedIn = $a[0] == true;
-			return $a[0] == true;
+			$this->loggedIn = $a[0] == 1;
+			return $a[0] == 1;
+		}
+		public function protect($var = true){
+			if(!$this->loggedIn || !$var) header("Location: ./");
+			return !$this->loggedIn;
 		}
 		public function isLoggedIn(){
 			return $this->loggedIn;
-		}
-		public function protect(){
-			if(!$this->loggedIn) header("Location: ./");
-			return !$this->loggedIn;
 		}
 		/*
 		 *	Adds a Journal entry to the DB.
