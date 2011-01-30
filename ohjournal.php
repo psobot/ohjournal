@@ -36,12 +36,13 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
+			var_dump($this->db());
 			$query = 'insert into '.Config::$tblEntries.' values(
 										NULL,
-										datetime('.$sendDate.', \'unixepoch\'), 
-										datetime('.$receiveDate.', \'unixepoch\'), 
-										"'.htmlentities($header).'", 
-										"'.htmlentities($body).'",
+										datetime('.mysql_real_escape_string($sendDate).', \'unixepoch\'), 
+										datetime('.mysql_real_escape_string($receiveDate).', \'unixepoch\'), 
+										"'.htmlentities(mysql_real_escape_string($header)).'", 
+										"'.htmlentities(mysql_real_escape_string($body)).'",
 										0)';
 			$r = $this->db()->query($query);
 			if ($r == false) var_dump($query);

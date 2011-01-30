@@ -2,7 +2,9 @@
 	require("ohjournal.php");
 	$j->protect();
 	//TODO: move to class function
-	if(isset($_POST['body']) && trim($_POST['body']) != "" && $j->submitEntry(date("U"), date("U"), "Sent from OhJournal Web.", $_POST['body'])){
+	if(	isset($_POST['body']) && 
+		trim($_POST['body']) != "" && 
+		$j->submitEntry(date("U"), date("U"), "Submitted online with OhJournal.", mysql_real_escape_string($_POST['body']))){
 		header("Location: ./read.php");
 		die();
 	}
