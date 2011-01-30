@@ -4,6 +4,7 @@
 		public static $owner		= "Peter Sobot";
 
 		public static $dbFile 		= "journal.db";
+		public static $cronUser		= "psobot";
 		public static $mailFile 	= "/var/mail/psobot";
 
 		public static $tblEntries 	= "entries";
@@ -30,7 +31,7 @@
 			return is_writeable(Config::$dbFile) && is_writeable(Config::$mailFile);
 		}
 		public static function readCrontab(){
-			return trim(shell_exec("crontab -l"));
+			return trim(shell_exec("crontab -l -u ".Config::$cronUser));
 		}
 		/*
 		 *	Gets latest mail to the user by reading user's mail file
