@@ -17,7 +17,7 @@
 		public static $rememberText	= "Hey, remember this?";
 		public static $emailDate	= "l, F jS, Y";
 
-		public static $webRead		= false;
+		public static $webRead		= true;
 		public static $webDate		= "l, F j\<\s\up\>S\</\s\up\>, Y";
 	}
 	class System{

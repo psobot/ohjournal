@@ -4,31 +4,27 @@
 	require("helpers.php");
 	class Journal{
 		private $db = null;
-		private $loggedIn = false;
 
 		function __construct($database){
-			$this->db = $this->db($database);
+			if($database == NULL) $database = Config::$dbFile;
+			$this->db = new SQLite3(dirname(__FILE__)."/".$database);
 		}
 		function __destruct(){
-			$this->db()->close();
-		}
-		private function db($database = NULL){
-			if($database == NULL) $database = Config::$dbFile;
-			return new SQLite3(dirname(__FILE__)."/".$database);
+			$this->db->close();
 		}
 		public function login($password){
 			$query = "select count(*) as login from ".Config::$tblUser." where password = '".md5($password)."'";
-			$r = $this->db()->query($query);
+			$r = $this->db->query($query);
 			$a = $r->fetchArray();
-			$this->loggedIn = $a[0] == 1;
+			$_SESSION['loggedin'] = $a[0] == 1;
 			return $a[0] == 1;
 		}
 		public function protect($var = true){
-			if(!$this->loggedIn || !$var) header("Location: ./");
-			return !$this->loggedIn;
+			if(!$this->isLoggedIn() || !$var) header("Location: ./");
+			return !$this->isLoggedIn();
 		}
 		public function isLoggedIn(){
-			return $this->loggedIn;
+			return $_SESSION['loggedin'];
 		}
 		/*
 		 *	Adds a Journal entry to the DB.
@@ -36,15 +32,13 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
-			var_dump($this->db());
-			$query = 'insert into '.Config::$tblEntries.' values(
-										NULL,
-										datetime('.mysql_real_escape_string($sendDate).', \'unixepoch\'), 
-										datetime('.mysql_real_escape_string($receiveDate).', \'unixepoch\'), 
-										"'.htmlentities(mysql_real_escape_string($header)).'", 
-										"'.htmlentities(mysql_real_escape_string($body)).'",
-										0)';
-			$r = $this->db()->query($query);
+			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
+										values(NULL, datetime(:send, "unixepoch"), datetime(:receieve, "unixepoch"), :header, :body, 0)');
+			$stmt->bindValue(':send', $sendDate);
+			$stmt->bindValue(':receive', $receiveDate);
+			$stmt->bindValue(':header', htmlentities($header));
+			$stmt->bindValue(':body', htmlentities($body));
+			$r = $stmt->execute();
 			if ($r == false) var_dump($query);
 			return $r;
 		}
@@ -57,19 +51,19 @@
 		 *
 		 */
 		public function getRandomEntry(){
-			$entry = $this->db()->querySingle("select * from ".Config::$tblEntries." where reflected = 0 order by random() limit 1", true);
+			$entry = $this->db->querySingle("select * from ".Config::$tblEntries." where reflected = 0 order by random() limit 1", true);
 			if($entry){
-				$this->db()->query("update ".Config::$tblEntries." set reflected = 1 where id = ".$entry['id']);
+				$this->db->query("update ".Config::$tblEntries." set reflected = 1 where id = ".$entry['id']);
 				return $entry;
 			} else return false;
 		}
 		public function getAllEntries(){
-			$q = $this->db()->query("select * from ".Config::$tblEntries." order by sent desc");
+			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc");
 			while($row = $q->fetchArray()){$rows[] = $row;}
 			return $rows;
 		}
 		public function getUniqueMonths(){
-			$q = $this->db()->query("select sent from ".Config::$tblEntries." order by sent desc");
+			$q = $this->db->query("select sent from ".Config::$tblEntries." order by sent desc");
 			while($row = $q->fetchArray()){$rows[date("Y-n", strtotime($row['sent']))] = date("F Y", strtotime($row['sent']));}
 			return $rows;
 		}
@@ -144,9 +138,5 @@
 			return mail(Config::$yourEmail, $subject, $body, $headers);
 		}
 	}
-	if(isset($_SESSION['journal']))	$j = $_SESSION['journal'];
-	else {
-		$j = new Journal(Config::$dbFile);
-		$_SESSION['journal'] = $j;
-	}
+	$j = new Journal(Config::$dbFile);
 ?>
