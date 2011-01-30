@@ -1,4 +1,5 @@
 <?php
+	date_default_timezone_set("America/Toronto");
 	class Config{
 		public static $owner		= "Peter Sobot";
 
@@ -16,13 +17,46 @@
 		public static $emailDate	= "l, F jS, Y";
 
 		public static $webDate		= "l, F j\<\s\up\>S\</\s\up\>, Y";
-
+	}
+	class System{
 		public static function error(){
 			echo "Error!\n";
 			foreach(func_get_args() as $error){
 				var_dump($error);
 			}
 			die();
+		}
+		public static function installed(){
+			return is_writeable(Config::$dbFile) && is_writeable(Config::$mailFile);
+		}
+		public static function readCrontab(){
+			return trim(shell_exec("crontab -l"));
+		}
+		/*
+		 *	Gets latest mail to the user by reading user's mail file
+		 *	Usually in /var/mail/username, but can be set in config
+		 *	This is, by all accounts, a dirty hack
+		 *	Triggering an event on postfix receive is much, much better.
+		 *
+		 *	Returns the raw source of the email.
+		 */
+		public static function getMailFile(){
+			$data = file_get_contents(Config::$mailFile);
+			if($data == NULL || trim($data) == "") return false;
+			return $data;
+		}
+
+		/*
+		 *	Clears out the user's mailbox file.
+		 *	Yes, you read that right.
+		 *	Probably shouldn't be doing this. Could cause major problems.
+		 *	Should change this to only delete the message passed in.
+		 */
+		public static function deleteMail($mail){
+			$f = fopen(Config::$mailFile, 'w');
+			fwrite($f, "");
+			fclose($f);
+			return (trim(file_get_contents(Config::$mailboxes.Config::$mailUser)) == "");
 		}
 	}
 ?>

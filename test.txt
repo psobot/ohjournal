@@ -1,52 +1,67 @@
-From psobot@gmail.com  Tue Jan 25 00:56:01 2011
+From psobot@gmail.com  Sat Jan 29 20:04:43 2011
 Return-Path: <psobot@gmail.com>
 X-Original-To: ohjournal@psobot.xen.prgmr.com
 Delivered-To: ohjournal@psobot.xen.prgmr.com
-Received: from mail-iy0-f182.google.com (mail-iy0-f182.google.com [209.85.210.182])
-	by psobot.xen.prgmr.com (Postfix) with ESMTPS id 80EC7301D0
-	for <ohjournal@psobot.xen.prgmr.com>; Tue, 25 Jan 2011 00:56:01 -0500 (EST)
-Received: by iyb26 with SMTP id 26so5022598iyb.27
-        for <ohjournal@psobot.xen.prgmr.com>; Mon, 24 Jan 2011 21:56:00 -0800 (PST)
+Received: from mail-iw0-f182.google.com (mail-iw0-f182.google.com [209.85.214.182])
+	by psobot.xen.prgmr.com (Postfix) with ESMTPS id 41C632FFB6
+	for <ohjournal@psobot.xen.prgmr.com>; Sat, 29 Jan 2011 20:04:43 -0500 (EST)
+Received: by iwn39 with SMTP id 39so4545484iwn.27
+        for <ohjournal@psobot.xen.prgmr.com>; Sat, 29 Jan 2011 17:04:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=gamma;
         h=domainkey-signature:content-type:mime-version:subject:from
          :in-reply-to:date:content-transfer-encoding:message-id:references:to
          :x-mailer;
-        bh=YNjmb86jJLzsBj7HOSz1ZTyptZKA49caGHcuD0XqQe4=;
-        b=ru+PtN51RHS1bVV9lVk5xyWdG/LxvxZLWGde5VZSqpk/VqEJoMVe+L9Hiz7tbCHkrF
-         zKuOkEGUTqxspzLKbGVG0XWU7IIe03QL4PHqTIUgwSdJJuIvDFAuV+Wp1a3KpX/oHT7/
-         y9Cx5KT63FOweQSzMLNALSm17ECIyRw2R9M34=
+        bh=zmlkh9c5DtK0/h6pomyR58G4vG0EgGMdZjO3d5lHHKE=;
+        b=PZR6QQGnJl1+FKsoUtIpy0DTUynJa1Jlb85aoeX7fdXquq9KME8ULcjvI4noQS4xNl
+         IJ+QOiNmws4Juaaf6q/2QPYy+rpwwMxJMQ/T9mdIxsOvfhf0r294pQzn3wbVh4aJeq5T
+         Plc1DDdp+g+kbTRi8UHhS5Cxna4wZNk8Ahf+A=
 DomainKey-Signature: a=rsa-sha1; c=nofws;
         d=gmail.com; s=gamma;
         h=content-type:mime-version:subject:from:in-reply-to:date
          :content-transfer-encoding:message-id:references:to:x-mailer;
-        b=T0u9q+eojeZc3B3hqM27uCdO/vb8yA2n1jDILkhrrEr2SVKnC6buHD+xr3pTtf/fXS
-         cypXJ46Lz8U5Xj9v8VaG7WZXjti0qv5c2dSyJ28rplmkcAJTUWxrpyb46L9sPiDYM3n3
-         9ULfxJWcKLNKHZtpiNpJ1Ll7tzfgrDNINJFcs=
-Received: by 10.42.178.135 with SMTP id bm7mr6049711icb.101.1295934960838;
-        Mon, 24 Jan 2011 21:56:00 -0800 (PST)
+        b=kG1SSYirmyvTBZsjQe0Wnytwcdmmb+BlyMnKHUJD2m3c8s0XvwAEObIhMADqTJLURu
+         IsWTPfftB4xCk9RNAWuufcvlW1OSj+TmEqNpx0YCOCZh5Hu5G5hNvS9SiiAGWWCqAdsY
+         bnvAIewn9/FQLMRDNIR9S3iR0TEDU3hFFPyA8=
+Received: by 10.42.176.1 with SMTP id bc1mr5977603icb.47.1296349481252;
+        Sat, 29 Jan 2011 17:04:41 -0800 (PST)
 Received: from [192.168.1.104] (d24-141-250-42.home.cgocable.net [24.141.250.42])
-        by mx.google.com with ESMTPS id u5sm10483707ics.18.2011.01.24.21.55.59
+        by mx.google.com with ESMTPS id 34sm16331089ibi.20.2011.01.29.17.04.39
         (version=TLSv1/SSLv3 cipher=RC4-MD5);
-        Mon, 24 Jan 2011 21:55:59 -0800 (PST)
-Content-Type: text/plain; charset=us-ascii
+        Sat, 29 Jan 2011 17:04:40 -0800 (PST)
+Content-Type: text/plain; charset=iso-8859-1
 Mime-Version: 1.0 (Apple Message framework v1082)
-Subject: Re: It's Monday, January 24 - How did your day go?
+Subject: Re: It's Saturday, January 29th - How did your day go?
 From: Peter Sobot <psobot@gmail.com>
-In-Reply-To: <20110125010002.C2D33301D1@psobot.xen.prgmr.com>
-Date: Tue, 25 Jan 2011 00:55:57 -0500
+In-Reply-To: <20110130010001.4C6B42FFB8@psobot.xen.prgmr.com>
+Date: Sat, 29 Jan 2011 20:04:38 -0500
 Content-Transfer-Encoding: quoted-printable
-Message-Id: <090FE172-A156-40F4-B190-4EA8D35469CE@gmail.com>
-References: <20110125010002.C2D33301D1@psobot.xen.prgmr.com>
+Message-Id: <F3891207-7D5F-4DE0-AC6B-AF9CA4B2D80B@gmail.com>
+References: <20110130010001.4C6B42FFB8@psobot.xen.prgmr.com>
 To: ohjournal@psobot.xen.prgmr.com
 X-Mailer: Apple Mail (2.1082)
 
-khaskgh!
-On Jan 24, 2011, at 8:00 PM, OhJournal wrote:
+Bork.
+Made a decent song (Downtown Caf=E9) that was inspired from several =
+walks to and around work. Don't know why.
+Fun.
+Needs to be a bit tighter...
+
+Now some more OhJournal work.
+Gaurav Mali asked for some help with se2014.com, that should be fun.
+Saw Josh in he pics of the Reddit meetup - I wanna go to the next one =
+now.
+
+Bork.
+
+On Jan 29, 2011, at 8:00 PM, OhJournal wrote:
 
 > Just respond to this email with your entry, and it will be saved =
 automagically.
-
-
-
-
+>=20
+>=20
+> Hey, remember this? About five months ago (on Thursday, September =
+23rd, 2010) you wrote:
+>=20
+> Skype with parents. Work and crazy fun times with Jon. Yaaaay.
+> Thanks, Peter Sobot petersobot.com
