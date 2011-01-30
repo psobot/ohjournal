@@ -80,6 +80,7 @@
 		 */
 		public function parseMailFile($raw){
 			$m = preg_match("/^From ".str_replace(".", "\.", Config::$yourEmail).".+([\s\S]+?)^From /", $raw, $matches);
+			var_dump($matches);
 			return trim($matches[1]);
 		}
 
