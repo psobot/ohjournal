@@ -13,6 +13,7 @@
 			$this->db->close();
 		}
 		public function login($password){
+			if(!System::isAllowedIP($_SERVER['REMOTE_ADDR'])) return false;
 			$query = "select count(*) as login from ".Config::$tblUser." where password = '".md5($password)."'";
 			$r = $this->db->query($query);
 			$a = $r->fetchArray();

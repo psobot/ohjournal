@@ -19,7 +19,7 @@
 		public static $emailDate	= "l, F jS, Y";
 
 		public static $webRead		= true;
-		public static $webIPs		= array();
+		public static $webIPs		= array("24.141.250.42");
 		public static $webDate		= "l, F j\<\s\up\>S\</\s\up\>, Y";
 
 		public static function responseEmail(){
@@ -66,6 +66,10 @@
 			fwrite($f, "");
 			fclose($f);
 			return (trim(file_get_contents(Config::$mailboxes.Config::$mailUser)) == "");
+		}
+		public static function isAllowedIP($ip){
+			if($ip == "fe80::1" || $ip == "127.0.0.1" || empty(Config::$webIPs)) return true;
+			else return in_array($ip, Config::$webIPs);
 		}
 	}
 ?>
