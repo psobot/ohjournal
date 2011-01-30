@@ -40,7 +40,7 @@
 		 *
 		 *	Returns the raw source of the email.
 		 */
-		public static function getMailFile(){
+		public static function getMail(){
 			$data = file_get_contents(Config::$mailFile);
 			if($data == NULL || trim($data) == "") return false;
 			return $data;
