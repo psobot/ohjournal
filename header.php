@@ -1,3 +1,4 @@
+<?php $j->logVisit(); ?>
 <html>
 	<head>
 		<title>

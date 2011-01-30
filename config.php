@@ -9,6 +9,7 @@
 
 		public static $tblEntries 	= "entries";
 		public static $tblUser	 	= "user";
+		public static $tblVisits	= "visits";
 
 		public static $yourEmail 	= "psobot+ohjournal@gmail.com";
 		public static $serverEmail 	= "ohjournal@psobot.xen.prgmr.com";
@@ -18,7 +19,13 @@
 		public static $emailDate	= "l, F jS, Y";
 
 		public static $webRead		= true;
+		public static $webIPs		= array();
 		public static $webDate		= "l, F j\<\s\up\>S\</\s\up\>, Y";
+
+		public static function responseEmail(){
+			if(strpos($this::$yourEmail) != -1)	return $this::$yourEmail;
+			else return preg_replace("/\+.+@/", "@", $this::$yourEmail);
+		}
 	}
 	class System{
 		public static function error(){

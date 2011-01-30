@@ -26,6 +26,16 @@
 		public function isLoggedIn(){
 			return $_SESSION['loggedin'];
 		}
+		public function logVisit(){
+			$stmt = $this->db->prepare('insert into '.Config::$tblVisits.' 
+										values(NULL, datetime("now"), :ip, :page, :loggedin)');
+			$stmt->bindValue(':ip', $_SERVER['REMOTE_ADDR']);
+			$stmt->bindValue(':page', $_SERVER['PHP_SELF']);
+			$stmt->bindValue(':loggedin', ($this->isLoggedIn() ? 1 : 0));
+			$r = $stmt->execute();
+			if ($r == false) var_dump($query);
+			return $r;			
+		}
 		/*
 		 *	Adds a Journal entry to the DB.
 		 *	Returns through from DB call. (false on error)
@@ -77,8 +87,8 @@
 			if($raw === false) return false;
 			$s = array(	".", 	"+"		);
 			$r = array(	"\.", 	"\+"	);
-			$m = preg_match("/^From ".str_replace(".", "\.", Config::$yourEmail).".+([\s\S]+?)^From /", $raw, $matches);
-			var_dump($raw, $matches, "/^From ".str_replace($s, $r, Config::$yourEmail).".+([\s\S]+?)^From /");
+			$m = preg_match("/^From ".str_replace(".", "\.", Config::responseEmail()).".+([\s\S]+?)^From /", $raw, $matches);
+			var_dump($raw, $matches, "/^From ".str_replace($s, $r, Config::responseEmail()).".+([\s\S]+?)^From /");
 			return trim($matches[1]);
 		}
 
