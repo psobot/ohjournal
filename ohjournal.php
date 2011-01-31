@@ -88,8 +88,7 @@
 			if($raw === false) return false;
 			$s = array(	".", 	"+"		);
 			$r = array(	"\.", 	"\+"	);
-			$m = preg_match("/^From ".str_replace(".", "\.", Config::responseEmail()).".+([\s\S]+?)(^From )?/", $raw, $matches);
-			var_dump($raw, $matches, "/^From ".str_replace($s, $r, Config::responseEmail()).".+([\s\S]+?)(^From )?/");
+			$m = preg_match("/^(From ".str_replace(".", "\.", Config::responseEmail()).".+)(^From )/ms", $raw, $matches);
 			return trim($matches[1]);
 		}
 
