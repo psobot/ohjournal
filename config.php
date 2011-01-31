@@ -23,8 +23,7 @@
 		public static $webDate		= "l, F j\<\s\up\>S\</\s\up\>, Y";
 
 		public static function responseEmail(){
-			if(strpos(Config::$yourEmail) != -1)	return Config::$yourEmail;
-			else return preg_replace("/\+.+@/", "@", Config::$yourEmail);
+			return preg_replace("/\+.+@/", "@", Config::$yourEmail);
 		}
 	}
 	class System{
