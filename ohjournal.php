@@ -4,6 +4,7 @@
 	require("helpers.php");
 	class Journal{
 		private $db = null;
+		public $data = null;
 
 		function __construct($database){
 			if($database == NULL) $database = Config::$dbFile;
@@ -70,20 +71,23 @@
 		}
 		public function getAllEntries(){
 			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc");
-			while($row = $q->fetchArray()){$rows[] = $row;}
-			return $rows;
-		}
-		public function getAllDailyEntries(){
-			$rows = $this->getAllEntries();
-			foreach($rows as $key => $row){
-				var_dump($row['sent'] . " " . $row['received']);
+			while($row = $q->fetchArray()){$in[] = $row;}
+			foreach($in as $key => $row){
+				$out[date("Y-m", strtotime($row['sent']." GMT"))][date("Y-m-d", strtotime($row['sent']." GMT"))][] = $row;
 			}
-			return $rows;
+			$this->data = $out;
+			return $out;
 		}
-		public function getUniqueMonths(){
-			$q = $this->db->query("select sent from ".Config::$tblEntries." order by sent desc");
-			while($row = $q->fetchArray()){$rows[date("Y-n", strtotime($row['sent']))] = date("F Y", strtotime($row['sent']));}
-			return $rows;
+		public function countDays(){
+			$count = 0;
+			foreach($this->data as $month => $days)
+				foreach($days as $day => $entries) $count += count($entries);
+			return $count;
+		}
+		public function totalDays(){
+			$count = 0;
+			foreach(array_keys($this->data) as $month)	$count += date("t", $month);
+			return $count;
 		}
 
 		/*
