@@ -35,7 +35,7 @@
 	<?php
 		foreach($entries as $row){
 			$row['received'] .= " GMT";
-			$body = trim(preg_replace("/[\n\r]/", "<br />", $row['entry']));
+			$body = trim(preg_replace("/[\n]/", "<br />", $row['entry']));
 	?>
 			<div class="body"><?php echo $body; ?></div>
 	<?php
