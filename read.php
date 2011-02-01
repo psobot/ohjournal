@@ -5,7 +5,7 @@
 	$data = $j->getAllEntries();
 ?>
 <h2>Your Entries</h2>
-<h3><?php echo $j->countDays(); ?> entries over <?php echo $j->totalDays(); ?> days.</h3>
+<h3><?php echo $a = $j->countDays(); ?> entries over <?php echo $b = $j->totalDays(); ?> days. (<?php echo intval($a/$b * 100); ?>%)</h3>
 <div id="jump">
 	<p>	<?php
 			$i = 0;
@@ -21,7 +21,7 @@
 	$lastDate = null;
 	foreach($data as $month => $days){
 		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>".
-				count($days)." of ".date("t", strtotime($month . " GMT"));
+				"<h4>".($a = count($days))." responses over ".($b = date("t", strtotime($month . " GMT")))." days. (".intval($a/$b * 100)."%)</h4>";
 		foreach($days as $day => $entries){
 			$sent = date(Config::$webDate, strtotime($day));
 ?>
