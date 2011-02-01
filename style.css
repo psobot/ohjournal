@@ -110,6 +110,11 @@ h4{
 	text-align: center;
 	color: #ccc;
 }
+#unlock input#passwordHolder{
+	margin: 24px auto 10px auto;
+	display: block;
+}
+#unlock input#password{	display: none;}
 #unlock input[type=submit]{
 	color: #000;
 }

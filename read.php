@@ -17,7 +17,7 @@
 </div>
 	<?php 
 	$lastDate = null;
-	foreach($j->getAllEntries() as $row): 
+	foreach($j->getAllDailyEntries() as $row): 
 		$row['sent'] .= " GMT";
 		$row['received'] .= " GMT";
 		$sent = date(Config::$webDate, strtotime($row['sent']));

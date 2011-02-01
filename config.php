@@ -64,7 +64,7 @@
 			$f = fopen(Config::$mailFile, 'w');
 			fwrite($f, "");
 			fclose($f);
-			return (trim(file_get_contents(Config::$mailboxes.Config::$mailUser)) == "");
+			return (trim(file_get_contents(Config::$mailFile)) == "");
 		}
 		public static function isAllowedIP($ip){
 			if($ip == "fe80::1" || $ip == "127.0.0.1" || empty(Config::$webIPs)) return true;

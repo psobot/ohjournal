@@ -29,5 +29,9 @@ $(document).ready(function(){
 	}, function(){
 		if(!$(this).siblings(".body").is(":visible"))$(this).siblings(".down").hide();
 	});
+	$("#passwordHolder").focus(function(){
+		$(this).remove();
+		$("#password").show().focus();
+	});
 });
 

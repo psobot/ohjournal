@@ -73,6 +73,13 @@
 			while($row = $q->fetchArray()){$rows[] = $row;}
 			return $rows;
 		}
+		public function getAllDailyEntries(){
+			$rows = $this->getAllEntries();
+			foreach($rows as $key => $row){
+				var_dump($row['sent'] . " " . $row['received']);
+			}
+			return $rows;
+		}
 		public function getUniqueMonths(){
 			$q = $this->db->query("select sent from ".Config::$tblEntries." order by sent desc");
 			while($row = $q->fetchArray()){$rows[date("Y-n", strtotime($row['sent']))] = date("F Y", strtotime($row['sent']));}
