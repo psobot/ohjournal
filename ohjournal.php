@@ -95,8 +95,9 @@
 			if($raw === false) return false;
 			$s = array(	".", 	"+"		);
 			$r = array(	"\.", 	"\+"	);
-			$m = preg_match("/^(From ".str_replace(".", "\.", Config::responseEmail()).".+)(^From )/ms", $raw, $matches);
-			return trim($matches[1]);
+			$m = preg_match("/^(From ".str_replace(".", "\.", Config::responseEmail()).".+)(^From )?/ms", $raw, $matches);
+			if($m)	return trim($matches[1]);
+			else return null;
 		}
 
 		/*
