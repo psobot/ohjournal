@@ -5,7 +5,12 @@
 	$data = $j->getAllEntries();
 ?>
 <h2>Your Entries</h2>
-<h3 class="percent"><?php echo $a = $j->countDays(); ?> entr<?php echo ($a>1)?"ies":"y"; ?> over <?php echo $b = $j->totalDays(); ?> days. (<?php echo intval($a/$b * 100); ?>%)</h3>
+<h3 class="percent">
+	<?php echo $a = $j->countDays(); ?> 
+	entr<?php echo ($a>1)?"ies":"y"; ?> over 
+	<?php echo $b = $j->countTotalDays(); ?> day<?php echo (($b>1)?"s":""); ?>. 
+	(<?php echo intval($a/$b * 100); ?>%)
+</h3>
 <div id="jump">
 	<p>	<?php
 			$i = 0;
@@ -21,7 +26,12 @@
 	$lastDate = null;
 	foreach($data as $month => $days){
 		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>".
-				"<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over ".($b = date("t", strtotime($month . " GMT")))." days. (".intval($a/$b * 100)."%)</h4>";
+				"<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over ";
+
+		if(date("n", strtotime($month)) == date("n"))	$b = date("j");
+		else $b = date("t", strtotime($month));
+
+		echo $b." day".(($b>1)?"s":"").". (".intval($a/$b * 100)."%)</h4>";
 		foreach($days as $day => $entries){
 			$sent = date(Config::$webDate, strtotime($day));
 ?>

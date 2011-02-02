@@ -84,9 +84,12 @@
 				foreach($days as $day => $entries) $count += count($entries);
 			return $count;
 		}
-		public function totalDays(){
+		public function countTotalDays(){
 			$count = 0;
-			foreach(array_keys($this->data) as $month)	$count += date("t", $month);
+			foreach(array_keys($this->data) as $month){
+				if(date("n", strtotime($month)) == date("n"))	$count += date("j");
+				else $count += date("t", strtotime($month));
+			}
 			return $count;
 		}
 
