@@ -45,7 +45,7 @@
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
 			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
-										values(NULL, datetime(:send, "unixepoch"), datetime(:receieve, "unixepoch"), :header, :body, 0)');
+										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
 			$stmt->bindValue(':send', $sendDate);
 			$stmt->bindValue(':receive', $receiveDate);
 			$stmt->bindValue(':header', htmlentities($header));

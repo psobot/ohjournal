@@ -44,10 +44,13 @@
 		</div>
 	<?php
 		foreach($entries as $row){
-			$row['received'] .= " GMT";
+	//		$row['received'] .= " GMT";
 			$body = trim(preg_replace("/[\n]/", "<br />", $row['entry']));
 	?>
-			<div class="body"><?php echo $body; ?></div>
+			<div class="body">
+				<div class="received"><?php echo date("g:i a", strtotime($row['received'])); ?></div>
+				<?php echo $body; ?>
+			</div>
 	<?php
 		}
 	?>

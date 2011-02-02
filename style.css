@@ -201,10 +201,8 @@ textarea#body{
 .entry.active .bar:hover {	cursor: default;	}
 .entry .received {
 	color: #ccc;
-	position: absolute;
-	right: 10px;
-	font-size: 10px;
-	top: 8px;
+	font-size: 12px;
+	float: right;
 }
 .entry .sent{
 
