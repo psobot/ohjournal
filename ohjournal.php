@@ -120,7 +120,7 @@
 			preg_match("%On (.+?), at (.+?), OhJournal%", $body, $sendDate);	//Parse send date & time from reply line
 			$sendDate = strtotime($sendDate[1]." ".$sendDate[2]);
 
-			preg_match("%^([\s\S]+?)On .{3} \d{2}, \d{4}, at %", $body, $body);	//Remove previous email from what's being saved
+			preg_match("%^([\s\S]+?)On .+? \d\d?, \d{4}, at %", $body, $body);	//Remove previous email from what's being saved
 			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($body[1]))));
 
 			return array($sendDate, $receiveDate, $header, $body);
