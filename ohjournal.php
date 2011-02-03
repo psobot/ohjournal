@@ -50,7 +50,8 @@
 			$stmt->bindValue(':receive', $receiveDate);
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
-			return $stmt->execute();
+			$r = $stmt->execute();
+			return ($r === true);
 		}
 
 		/*
