@@ -51,7 +51,9 @@
 			$stmt->bindValue(':receive', $receiveDate);
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
-			return $stmt->execute();
+			//return $stmt->execute();
+			var_dump($stmt);
+			return 1;
 		}
 
 		/*
@@ -69,7 +71,7 @@
 			} else return false;
 		}
 		public function getAllEntries(){
-			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc");
+			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent, received desc");
 			while($row = $q->fetchArray()){$in[] = $row;}
 			foreach($in as $key => $row){
 				$out[date("Y-m", strtotime($row['sent']." GMT"))][date("Y-m-d", strtotime($row['sent']." GMT"))][] = $row;
@@ -137,8 +139,7 @@
 			if(trim($raw) == "" || $raw == false)	return false;
 			$data = $this->parseEmail($raw);
 			if($this->submitEntry($data[0], $data[1], $data[2], $data[3])){
-				var_dump($data[3], "Submitted.");
-				var_dump(System::deleteMail($raw));
+				System::deleteMail($raw);
 				return true;
 			}
 		}
