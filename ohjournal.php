@@ -53,6 +53,9 @@
 			$stmt->bindValue(':body', htmlentities($body));
 			//return $stmt->execute();
 			var_dump($stmt);
+			print_r($stmt);
+			echo "\n". serialize($stmt);
+			echo "\n". strval($stmt);
 			return 1;
 		}
 
