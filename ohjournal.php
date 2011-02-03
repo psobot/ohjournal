@@ -44,7 +44,6 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
-			debug_print_backtrace();
 			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
 										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
 			$stmt->bindValue(':send', $sendDate);
