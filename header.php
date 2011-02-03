@@ -1,4 +1,5 @@
 <?php $j->logVisit(); ?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>

@@ -17,6 +17,7 @@
 
 		public static $rememberText	= "Hey, remember this?";
 		public static $emailDate	= "l, F jS, Y";
+		public static $emailTime	= "8:00 PM EST";
 
 		public static $webRead		= true;
 		public static $webIPs		= array("24.141.250.42");

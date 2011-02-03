@@ -23,12 +23,10 @@
 	</p>
 </div>
 <?php 
-	$lastDate = null;
 	foreach($data as $month => $days){
 		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>".
 				"<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over ";
-
-		if(date("n", strtotime($month)) == date("n"))	$b = date("j");
+		if(date("n", strtotime($month)) == date("n"))	$b = date("j")  - ((time() < strtotime(Config::$emailTime)) ? 1 : 0);
 		else $b = date("t", strtotime($month));
 
 		echo $b." day".(($b>1)?"s":"").". (".intval($a/$b * 100)."%)</h4>";
@@ -43,12 +41,13 @@
 			<div class="sent"><?php echo $sent; ?></div>
 		</div>
 	<?php
+		//TODO: make sure each entr is ordered properly
 		foreach($entries as $row){
 			$row['received'] .= " GMT";
 			$body = trim(preg_replace("/[\n]/", "<br />", $row['entry']));
 	?>
 			<div class="body">
-				<div class="received"><?php echo date("g:i a", strtotime($row['received'])); ?></div>
+				<div class="received"><?php echo date("l g:i a", strtotime($row['received'])); ?></div>
 				<?php echo $body; ?>
 			</div>
 	<?php

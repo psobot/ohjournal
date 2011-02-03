@@ -44,15 +44,15 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
+			var_dump($sendDate, $receiveDate, $header, $body);
+			debug_print_backtrace();
 			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
 										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
 			$stmt->bindValue(':send', $sendDate);
 			$stmt->bindValue(':receive', $receiveDate);
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
-			$r = $stmt->execute();
-			if ($r == false) var_dump($query);
-			return $r;
+			return $stmt->execute();
 		}
 
 		/*
@@ -87,7 +87,7 @@
 		public function countTotalDays(){
 			$count = 0;
 			foreach(array_keys($this->data) as $month){
-				if(date("n", strtotime($month)) == date("n"))	$count += date("j");
+				if(date("n", strtotime($month)) == date("n"))	$count += date("j") - ((time() > strtotime(Config::$emailTime)) ? 1 : 0);
 				else $count += date("t", strtotime($month));
 			}
 			return $count;

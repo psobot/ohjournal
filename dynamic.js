@@ -1,3 +1,8 @@
+jQuery.easing['jswing'] = jQuery.easing['swing'];
+jQuery.extend( jQuery.easing,{ def: 'easeInOutSine',
+	easeInOutQuad: function (x, t, b, c, d) { if ((t/=d/2) < 1) return c/2*t*t + b;	return -c/2 * ((--t)*(t-2) - 1) + b; },
+	easeInOutSine: function (x, t, b, c, d) { return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b; }});
+
 $(document).ready(function(){
 	$(".scroll").click(function(event){
 		event.preventDefault();
@@ -6,7 +11,7 @@ $(document).ready(function(){
 		var trgt = parts[1];
 		var target_offset = $("#"+trgt).offset();
 		var target_top = target_offset.top;
-		$('html, body').animate({scrollTop:target_top}, 500);
+		$('html, body').animate({scrollTop:target_top}, 750, "easeInOutQuad");
 	});
 
 	$(".bar").click(function(e){
