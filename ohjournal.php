@@ -44,7 +44,6 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
-			var_dump($sendDate, $receiveDate, $header, $body);
 			debug_print_backtrace();
 			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
 										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
@@ -138,7 +137,8 @@
 			if(trim($raw) == "" || $raw == false)	return false;
 			$data = $this->parseEmail($raw);
 			if($this->submitEntry($data[0], $data[1], $data[2], $data[3])){
-				System::deleteMail($raw);
+				var_dump($data[3], "Submitted.");
+				var_dump(System::deleteMail($raw));
 				return true;
 			}
 		}
