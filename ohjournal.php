@@ -35,6 +35,7 @@
 			$stmt->bindValue(':page', $_SERVER['PHP_SELF']);
 			$stmt->bindValue(':loggedin', ($this->isLoggedIn() ? 1 : 0));
 			$r = $stmt->execute();
+			$stmt->close();
 			if ($r == false) var_dump($query);
 			return $r;			
 		}
@@ -44,14 +45,15 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
-			$sbmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
+			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
 										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
-			$sbmt->bindValue(':send', $sendDate);
-			$sbmt->bindValue(':receive', $receiveDate);
-			$sbmt->bindValue(':header', htmlentities($header));
-			$sbmt->bindValue(':body', htmlentities($body));
-			$in = $sbmt->execute();
-			return !($in === false);
+			$stmt->bindValue(':send', $sendDate);
+			$stmt->bindValue(':receive', $receiveDate);
+			$stmt->bindValue(':header', htmlentities($header));
+			$stmt->bindValue(':body', htmlentities($body));
+			$r = $stmt->execute();
+			$stmt->close();
+			return !($r === false);
 		}
 
 		/*
