@@ -44,14 +44,14 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
-			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
+			$sbmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
 										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
-			$stmt->bindValue(':send', $sendDate);
-			$stmt->bindValue(':receive', $receiveDate);
-			$stmt->bindValue(':header', htmlentities($header));
-			$stmt->bindValue(':body', htmlentities($body));
-			$r = $stmt->execute();
-			return !($r === false);
+			$sbmt->bindValue(':send', $sendDate);
+			$sbmt->bindValue(':receive', $receiveDate);
+			$sbmt->bindValue(':header', htmlentities($header));
+			$sbmt->bindValue(':body', htmlentities($body));
+			$in = $sbmt->execute();
+			return !($in === false);
 		}
 
 		/*
