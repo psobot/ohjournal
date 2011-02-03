@@ -70,7 +70,7 @@
 			} else {
 				$mailFileContents = file_get_contents(Config::$mailFile);
 				$f = fopen(Config::$mailFile, 'w');
-				$r = fwrite($f, substr_replace($mail, $mailFileContents, 0));
+				$r = fwrite($f, str_replace($mail, "", $mailFileContents));
 				fclose($f);
 				return !($r == false);
 			}
