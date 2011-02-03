@@ -51,7 +51,7 @@
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
 			$r = $stmt->execute();
-			return ($r === true);
+			return !($r === false);
 		}
 
 		/*
