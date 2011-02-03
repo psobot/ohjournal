@@ -62,10 +62,18 @@
 		 *	Should change this to only delete the message passed in.
 		 */
 		public static function deleteMail($mail = NULL){
-			$f = fopen(Config::$mailFile, 'w');
-			fwrite($f, "");
-			fclose($f);
-			return (trim(file_get_contents(Config::$mailFile)) == "");
+			if($mail == NULL){
+				$f = fopen(Config::$mailFile, 'w');
+				fwrite($f, "");
+				fclose($f);
+				return (trim(file_get_contents(Config::$mailFile)) == "");
+			} else {
+				$mailFileContents = file_get_contents(Config::$mailFile);
+				$f = fopen(Config::$mailFile, 'w');
+				$r = fwrite($f, substr_replace($mail, $mailFileContents, 0));
+				fclose($f);
+				return !($r == false);
+			}
 		}
 		public static function isAllowedIP($ip){
 			if($ip == "fe80::1" || $ip == "127.0.0.1" || empty(Config::$webIPs)) return true;
