@@ -34,10 +34,7 @@
 			$stmt->bindValue(':ip', $_SERVER['REMOTE_ADDR']);
 			$stmt->bindValue(':page', $_SERVER['PHP_SELF']);
 			$stmt->bindValue(':loggedin', ($this->isLoggedIn() ? 1 : 0));
-			$r = $stmt->execute();
-			$stmt->close();
-			if ($r == false) var_dump($query);
-			return $r;			
+			return $stmt->execute();
 		}
 		/*
 		 *	Adds a Journal entry to the DB.
@@ -51,9 +48,7 @@
 			$stmt->bindValue(':receive', $receiveDate);
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
-			$r = $stmt->execute();
-			$stmt->close();
-			return !($r === false);
+			return $stmt->execute();
 		}
 
 		/*
@@ -128,20 +123,6 @@
 			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($body[1]))));
 
 			return array($sendDate, $receiveDate, $header, $body);
-		}
-
-		/*
-		 *	The worker function to receive new mail into the database.
-		 *
-		 */
-		public function addEntry(){
-			$raw = $this->parseMailFile(System::getMail());
-			if(trim($raw) == "" || $raw == false)	return false;
-			$data = $this->parseEmail($raw);
-			if($this->submitEntry($data[0], $data[1], $data[2], $data[3])){
-				System::deleteMail($raw);
-				return true;
-			}
 		}
 
 		public function sendDaily(){
