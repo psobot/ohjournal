@@ -51,12 +51,7 @@
 			$stmt->bindValue(':receive', $receiveDate);
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
-			//return $stmt->execute();
-			var_dump($stmt);
-			print_r($stmt);
-			echo "\n". serialize($stmt);
-			echo "\n". strval($stmt);
-			return 1;
+			return $stmt->execute();
 		}
 
 		/*
@@ -74,7 +69,7 @@
 			} else return false;
 		}
 		public function getAllEntries(){
-			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent, received desc");
+			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc, received asc");
 			while($row = $q->fetchArray()){$in[] = $row;}
 			foreach($in as $key => $row){
 				$out[date("Y-m", strtotime($row['sent']." GMT"))][date("Y-m-d", strtotime($row['sent']." GMT"))][] = $row;
