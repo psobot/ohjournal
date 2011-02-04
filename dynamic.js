@@ -19,7 +19,6 @@ $(document).ready(function(){
 		$(this).siblings(".body").slideToggle();
 		$(this).parent().toggleClass("active");
 		$(this).siblings(".up").fadeToggle();
-		$(this).siblings(".delete").fadeToggle();
 		$(this).siblings(".down").fadeOut();
 	});
 	$(".up").click(function(e){
@@ -27,7 +26,6 @@ $(document).ready(function(){
 		$(this).siblings(".body").slideToggle();
 		$(this).parent().toggleClass("active");
 		$(this).fadeToggle();
-		$(this).siblings(".delete").fadeToggle();
 	});
 	$(".bar").hover(function(){
 		if(!$(this).siblings(".body").is(":visible"))$(this).siblings(".down").show();

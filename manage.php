@@ -1,12 +1,12 @@
 <?php
-	$title = "Settings";
 	require("ohjournal.php");
+	$title = "Manage Your Journal";
 	$j->protect();
 	require("header.php");
 ?>
 
-<h2>Settings</h2>
-	<div id="settings">
+<h2><?php echo $title; ?></h2>
+	<div id="info">
 		<h3>System</h3>
 		<p>
 			Running PHP <?php echo phpversion() . " as user ".trim(shell_exec("whoami"))." on " . PHP_OS; ?>.<br />

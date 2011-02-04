@@ -36,7 +36,6 @@
 	<div class="entry">
 		<a href="#" class="down button"></a>
 		<a href="#" class="up button"></a>
-		<a href="#" class="delete button"></a>
 		<div class="bar">
 			<div class="sent"><?php echo $sent; ?></div>
 		</div>

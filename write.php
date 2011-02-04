@@ -1,5 +1,6 @@
 <?php
 	require("ohjournal.php");
+	$title = "New Entry";
 	$j->protect();
 	//TODO: move to class function
 	if(	isset($_POST['body']) && 
@@ -11,7 +12,7 @@
 	require("header.php");
 ?>
 
-<h2>New Entry</h2>
+<h2><?php echo $title; ?></h2>
 	<div id="new">
 		<h4>It's <?php echo date(Config::$webDate); ?>. What's on your mind?</h4>
 		<form action="" method="post">

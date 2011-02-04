@@ -1,6 +1,6 @@
 <?php
-	$title = "Unlock your journal";
 	require("ohjournal.php");
+	$title = "Unlock " . (( Config::$owner == "" ) ? "your" : Config::$owner . "'s") . " journal.";
 	//TODO: move to class function
 	if($_POST['password'] && $j->login($_POST['password'])){
 		if(Config::$webRead)header("Location: ./read.php");
@@ -14,7 +14,7 @@
 	require("header.php");
 ?>
 
-<h2>Unlock <?php echo ( Config::$owner == "" ) ? "your" : Config::$owner . "'s"; ?> journal</h2>
+<h2><?php echo $title; ?></h2>
 	<div id="unlock">
 		<form action="./" method="post">
 			<input type="text" name="password" value="password" id="passwordHolder" />

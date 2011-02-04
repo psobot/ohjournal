@@ -21,7 +21,7 @@
 						<?php if($j->isLoggedIn()){ ?>
 						<?php if(Config::$webRead){ ?><li class="read"><a href="./read.php">read</a></li><?php } ?>
 						<li class="write"><a href="./write.php">write</a></li>
-						<li class="settings"><a href="./settings.php">settings</a></li>
+						<li class="settings"><a href="./manage.php">manage</a></li>
 						<li class="lock"><a href="./lock.php">lock</a></li>
 						<?php } ?>
 					</ul>
