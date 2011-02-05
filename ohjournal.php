@@ -137,7 +137,7 @@
 							" (on ".
 							date("l, F jS, Y", strtotime($past['received'])).
 							") you wrote:\r\n\r\n".
-							$past['entry'];
+							html_entity_decode($past['entry']);
 			else $body .= "\r\n\r\n\r\nThere are no past journal entries to show you... so get writing!";
 			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . Config::$serverEmail . "\r\n" .
