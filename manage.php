@@ -11,15 +11,15 @@
 		<p>
 			Running PHP <?php echo phpversion() . " as user ".trim(shell_exec("whoami"))." on " . PHP_OS; ?>.<br />
 			<?php
-				if(System::installed()){
+				if($j->installed()){
 					echo "OhJournal is installed properly.";
 				} else {
 					echo "OhJournal is not installed properly!";
 					echo "<ul>";
-					echo "<li>Database file: ".(is_writeable(Config::$dbFile) ? "writeable" : "not writeable!")."</li>";
-					echo "<li>Mail file: ".(is_writeable(Config::$mailFile) ? "writeable" : "not writeable!")."</li>";
+					echo "<li>Database file: ".(is_writeable($j->config->dbFile) ? "writeable" : "not writeable!")."</li>";
+					echo "<li>Mail file: ".(is_writeable($j->config->mailFile) ? "writeable" : "not writeable!")."</li>";
 				}
-				echo System::readCrontab();
+				echo $j->readCrontab();
 			?>
 		</p>
 	</div>

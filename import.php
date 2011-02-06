@@ -19,7 +19,7 @@
 
 	require("./ohjournal.php");
 	date_default_timezone_set("America/Toronto");			//set your timezone here if this is incorrect
-	$j = new Journal(Config::$dbFile);
+	$j = new Journal($j->config->dbFile);
 
 	$f = file_get_contents("./ohlife_20101209.txt");
 	$lines = explode("\n", $f);

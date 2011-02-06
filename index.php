@@ -1,13 +1,13 @@
 <?php
 	require("ohjournal.php");
-	$title = "Unlock " . (( Config::$owner == "" ) ? "your" : Config::$owner . "'s") . " journal.";
+	$title = "Unlock " . (( $j->config->owner == "" ) ? "your" : $j->config->owner . "'s") . " journal.";
 	//TODO: move to class function
 	if($_POST['password'] && $j->login($_POST['password'])){
-		if(Config::$webRead)header("Location: ./read.php");
+		if($j->config->webRead)header("Location: ./read.php");
 		else header("Location: ./write.php");
 		die();
-	} else if ($j->isLoggedIn() && Config::$webRead){
-		if(Config::$webRead)header("Location: ./read.php");
+	} else if ($j->isLoggedIn() && $j->config->webRead){
+		if($j->config->webRead)header("Location: ./read.php");
 		else header("Location: ./write.php");
 		die();
 	}

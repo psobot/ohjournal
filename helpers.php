@@ -9,8 +9,14 @@
 			return ($uppercase ? ucwords($number) : $number);
 		}
 	}
-
-	class Date_Difference {
+	class DateCompare {
+		public static function daysApart($one, $two){
+			if(!is_int($one))$one = strtotime($one . " GMT");
+			if(!is_int($two))$two = strtotime($two . " GMT");
+			if(date("Y", $one) != date("Y", $two))
+				return abs((date("z", $two) + 365*(date("Y", $two) - date("Y", $one))) - date("z", $one));
+			else return abs(date("z", $one) - date("z", $two));
+		}
 		/**
 		 *	Converts a timestamp to pretty human-readable format.
 		 * 
@@ -19,14 +25,10 @@
 		 *	Licensed under the MIT license.
 		 *	Ported to PHP >= 5.1 by Zach Leatherman (zachleat.com)
 		 *
-		 */
-		public static function getStringResolved($date, $compareTo = NULL) { 
+		 */	
+		public static function differenceInWords(DateTime $date, $compareTo = NULL) {
 			if(!is_null($compareTo)) $compareTo = new DateTime($compareTo); 
-			return self::getString(new DateTime($date), $compareTo); 
-		} 
-	
-		public static function getString(DateTime $date, DateTime $compareTo = NULL) {
-			if(is_null($compareTo))	$compareTo = new DateTime('now'); 
+			else $compareTo = new DateTime('now'); 
 			$diff = $compareTo->format('U') - $date->format('U'); 
 			$dayDiff = floor($diff / 86400); 
 	
@@ -48,14 +50,5 @@
 				return $years . ' year' . ($years != 1 ? 's' : ''); 
 			} 
 		} 
-	}
-	class DateCompare {
-		public static function daysApart($one, $two){
-			if(!is_int($one))$one = strtotime($one . " GMT");
-			if(!is_int($two))$two = strtotime($two . " GMT");
-			if(date("Y", $one) != date("Y", $two))
-				return abs((date("z", $two) + 365*(date("Y", $two) - date("Y", $one))) - date("z", $one));
-			else return abs(date("z", $one) - date("z", $two));
-		}
 	}
 ?>

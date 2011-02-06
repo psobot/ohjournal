@@ -1,6 +1,6 @@
 <?php
 	require("ohjournal.php");
-	$j->protect(Config::$webRead);
+	$j->protect($j->config->webRead);
 	require("header.php");
 	$data = $j->getAllEntries();
 ?>
@@ -26,12 +26,12 @@
 	foreach($data as $month => $days){
 		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>".
 				"<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over ";
-		if(date("n", strtotime($month)) == date("n"))	$b = date("j")  - ((time() < strtotime(Config::$emailTime)) ? 1 : 0);
+		if(date("n", strtotime($month)) == date("n"))	$b = date("j")  - ((time() < strtotime($j->config->emailTime)) ? 1 : 0);
 		else $b = date("t", strtotime($month));
 
 		echo $b." day".(($b>1)?"s":"").". (".intval($a/$b * 100)."%)</h4>";
 		foreach($days as $day => $entries){
-			$sent = date(Config::$webDate, strtotime($day));
+			$sent = date($j->config->webDate, strtotime($day));
 ?>
 	<div class="entry">
 		<a href="#" class="down button"></a>

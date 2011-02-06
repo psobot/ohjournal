@@ -1,21 +1,32 @@
 <?php
 	session_start();
-	require("config.php");
 	require("helpers.php");
 	class Journal{
 		public $db = null;
-		public $data = null;
+		public $config = null;
+		public $entries = null;
 
-		function __construct($database){
-			if($database == NULL) $database = Config::$dbFile;
+		function __construct($database = "journal.db"){
 			$this->db = new SQLite3(dirname(__FILE__)."/".$database);
+
+			$r = $this->db->query("select * from config");
+			while($v = $r->fetchArray()) $this->config->$v[1] = $v[2];
+			
+			$r = $this->db->query("select * from ".$this->config->tblIPs);
+			while($v = $r->fetchArray()) $this->config->webIPs[] = $v[1];
+
+			date_default_timezone_set($this->config->timezone);
 		}
 		function __destruct(){
 			$this->db->close();
 		}
+		public static function isAllowedIP($ip){
+			if($ip == "fe80::1" || $ip == "127.0.0.1" || empty($this->config->webIPs)) return true;
+			else return in_array($ip, $this->config->webIPs);
+		}
 		public function login($password){
-			if(!System::isAllowedIP($_SERVER['REMOTE_ADDR'])) return false;
-			$query = "select count(*) as login from ".Config::$tblUser." where password = '".md5($password)."'";
+			if(!$this->isAllowedIP($_SERVER['REMOTE_ADDR'])) return false;
+			$query = "select count(*) as login from ".$this->config->tblUser." where password = '".md5($password)."'";
 			$r = $this->db->query($query);
 			$a = $r->fetchArray();
 			$_SESSION['loggedin'] = $a[0] == 1;
@@ -29,7 +40,7 @@
 			return $_SESSION['loggedin'];
 		}
 		public function logVisit(){
-			$stmt = $this->db->prepare('insert into '.Config::$tblVisits.' 
+			$stmt = $this->db->prepare('insert into '.$this->config->tblVisits.' 
 										values(NULL, datetime("now"), :ip, :page, :loggedin)');
 			$stmt->bindValue(':ip', $_SERVER['REMOTE_ADDR']);
 			$stmt->bindValue(':page', $_SERVER['PHP_SELF']);
@@ -42,7 +53,7 @@
 		 *
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
-			$stmt = $this->db->prepare('insert into '.Config::$tblEntries.' 
+			$stmt = $this->db->prepare('insert into '.$this->config->tblEntries.' 
 										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
 			$stmt->bindValue(':send', $sendDate);
 			$stmt->bindValue(':receive', $receiveDate);
@@ -59,31 +70,31 @@
 		 *
 		 */
 		public function getRandomEntry(){
-			$entry = $this->db->querySingle("select * from ".Config::$tblEntries." where reflected = 0 order by random() limit 1", true);
+			$entry = $this->db->querySingle("select * from ".$this->config->tblEntries." where reflected = 0 order by random() limit 1", true);
 			if($entry){
-				$this->db->query("update ".Config::$tblEntries." set reflected = 1 where id = ".$entry['id']);
+				$this->db->query("update ".$this->config->tblEntries." set reflected = 1 where id = ".$entry['id']);
 				return $entry;
 			} else return false;
 		}
 		public function getAllEntries(){
-			$q = $this->db->query("select * from ".Config::$tblEntries." order by sent desc, received asc");
+			$q = $this->db->query("select * from ".$this->config->tblEntries." order by sent desc, received asc");
 			while($row = $q->fetchArray()){$in[] = $row;}
 			foreach($in as $key => $row){
 				$out[date("Y-m", strtotime($row['sent']." GMT"))][date("Y-m-d", strtotime($row['sent']." GMT"))][] = $row;
 			}
-			$this->data = $out;
+			$this->entries = $out;
 			return $out;
 		}
 		public function countDays(){
 			$count = 0;
-			foreach($this->data as $month => $days)
+			foreach($this->entries as $month => $days)
 				foreach($days as $day => $entries) $count += count($entries);
 			return $count;
 		}
 		public function countTotalDays(){
 			$count = 0;
-			foreach(array_keys($this->data) as $month){
-				if(date("n", strtotime($month)) == date("n"))	$count += date("j") - ((time() > strtotime(Config::$emailTime)) ? 1 : 0);
+			foreach(array_keys($this->entries) as $month){
+				if(date("n", strtotime($month)) == date("n"))	$count += date("j") - ((time() > strtotime($this->config->emailTime)) ? 1 : 0);
 				else $count += date("t", strtotime($month));
 			}
 			return $count;
@@ -98,7 +109,7 @@
 			if($raw === false) return false;
 			$s = array(	".", 	"+"		);
 			$r = array(	"\.", 	"\+"	);
-			$m = preg_match("/^(From ".str_replace(".", "\.", Config::responseEmail()).".+)(^From )?/ms", $raw, $matches);
+			$m = preg_match("/^(From ".str_replace(".", "\.", $this->config->responseEmail()).".+)(^From )?/ms", $raw, $matches);
 			if($m)	return trim($matches[1]);
 			else return null;
 		}
@@ -132,18 +143,18 @@
 			$past		= 	$this->getRandomEntry();
 			if($past != false)
 				$body .= 	"\r\n\r\n\r\n".
-							Config::$rememberText." ".
-							Date_Difference::getStringResolved($past['received']).' ago'.
+							$this->config->rememberText." ".
+							DateCompare::differenceInWords($past['received']).' ago'.
 							" (on ".
 							date("l, F jS, Y", strtotime($past['received'])).
 							") you wrote:\r\n\r\n".
 							html_entity_decode($past['entry']);
 			else $body .= "\r\n\r\n\r\nThere are no past journal entries to show you... so get writing!";
-			$headers	=	'From: OhJournal <'.Config::$fromEmail.'>' . "\r\n" .
-							'Reply-To: ' . Config::$serverEmail . "\r\n" .
+			$headers	=	'From: OhJournal <'.$this->config->fromEmail.'>' . "\r\n" .
+							'Reply-To: ' . $this->config->serverEmail . "\r\n" .
 							'X-Mailer: OhJournal from user <'.trim(shell_exec("whoami")).'> on PHP/' . phpversion();
-			return mail(Config::$yourEmail, $subject, $body, $headers);
+			return mail($this->config->yourEmail, $subject, $body, $headers);
 		}
 	}
-	$j = new Journal(Config::$dbFile);
+	$j = new Journal();
 ?>

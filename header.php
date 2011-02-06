@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<title>
-			<?php echo ( Config::$owner == "" ) ? "" : Config::$owner . "'s "; ?>
+			<?php echo ( $j->config->owner == "" ) ? "" : $j->config->owner . "'s "; ?>
 			OhJournal
 			<?php echo ( $title == "" ) ? "" : " | $title"; ?>
 		</title>
@@ -20,7 +20,7 @@
 				<div id="items">
 					<ul>
 						<?php if($j->isLoggedIn()){ ?>
-						<?php if(Config::$webRead){ ?><li class="read"><a href="./read.php">read</a></li><?php } ?>
+						<?php if($j->config->webRead){ ?><li class="read"><a href="./read.php">read</a></li><?php } ?>
 						<li class="write"><a href="./write.php">write</a></li>
 						<li class="settings"><a href="./manage.php">manage</a></li>
 						<li class="lock"><a href="./lock.php">lock</a></li>

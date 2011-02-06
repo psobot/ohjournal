@@ -14,7 +14,7 @@
 
 <h2><?php echo $title; ?></h2>
 	<div id="new">
-		<h4>It's <?php echo date(Config::$webDate); ?>. What's on your mind?</h4>
+		<h4>It's <?php echo date($j->config->webDate); ?>. What's on your mind?</h4>
 		<form action="" method="post">
 			<textarea name="body" id="body"></textarea>
 			<input type="submit" name="submit" value="save" />
