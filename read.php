@@ -40,13 +40,18 @@
 			<div class="sent"><?php echo $sent; ?></div>
 		</div>
 	<?php
-		//TODO: make sure each entr is ordered properly
 		foreach($entries as $row){
 			$row['received'] .= " GMT";
 			$body = trim(preg_replace("/[\n]/", "<br />", $row['entry']));
 	?>
 			<div class="body">
-				<div class="received"><?php echo date("l g:i a", strtotime($row['received'])); ?></div>
+				<div class="received">
+				<?php 
+					if(DateCompare::daysApart($row['received'], $row['sent']) == 0) echo date("g:i a", strtotime($row['received']));
+					else echo date("g:i a", strtotime($row['received'])) . 
+							(($d = DateCompare::daysApart($row['received'], $row['sent'])) == 1 ? " the next day" : " ".NumberToWord::toWords($d)." days later");
+				?>
+				</div>
 				<?php echo $body; ?>
 			</div>
 	<?php

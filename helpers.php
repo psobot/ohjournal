@@ -49,4 +49,13 @@
 			} 
 		} 
 	}
+	class DateCompare {
+		public static function daysApart($one, $two){
+			if(!is_int($one))$one = strtotime($one . " GMT");
+			if(!is_int($two))$two = strtotime($two . " GMT");
+			if(date("Y", $one) != date("Y", $two))
+				return abs((date("z", $two) + 365*(date("Y", $two) - date("Y", $one))) - date("z", $one));
+			else return abs(date("z", $one) - date("z", $two));
+		}
+	}
 ?>

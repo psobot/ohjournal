@@ -21,6 +21,8 @@ h3{
 h3.percent{
 	border-bottom: none;
 }
+h3.left{	text-align: left; }
+h3.normal{	font-weight: normal; }
 h4{
 	text-align: center;
 	font-weight: normal;

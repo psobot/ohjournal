@@ -3,7 +3,7 @@
 	require("config.php");
 	require("helpers.php");
 	class Journal{
-		private $db = null;
+		public $db = null;
 		public $data = null;
 
 		function __construct($database){
