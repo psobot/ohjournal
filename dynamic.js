@@ -9,7 +9,7 @@ function changeHash(hash){
 }
 $(document).ready(function(){
 	$(".scroll").click(function(event){
-		var target_offset = $(window.location.hash).offset();
+		var target_offset = $($(this).attr("href")).offset();
 		var target_top = target_offset.top;
 		$('html, body').animate({scrollTop:target_top}, 750, "easeInOutQuad");
 	});
