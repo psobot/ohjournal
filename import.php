@@ -17,7 +17,7 @@
 	 *
 	 */
 
-	require("./ohjournal.php");
+	require_once("./ohjournal.php");
 	date_default_timezone_set("America/Toronto");			//set your timezone here if this is incorrect
 	$j = new Journal($j->config->dbFile);
 

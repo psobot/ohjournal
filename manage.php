@@ -1,8 +1,8 @@
 <?php
-	require("ohjournal.php");
+	require_once("ohjournal.php");
 	$title = "Manage Your Journal";
 	$j->protect();
-	require("header.php");
+	require_once("header.php");
 ?>
 
 <h2><?php echo $title; ?></h2>
@@ -11,18 +11,18 @@
 		<p>
 			Running PHP <?php echo phpversion() . " as user ".trim(shell_exec("whoami"))." on " . PHP_OS; ?>.<br />
 			<?php
-				if($j->installed()){
+				if($j->isInstalled()){
 					echo "OhJournal is installed properly.";
 				} else {
 					echo "OhJournal is not installed properly!";
 					echo "<ul>";
-					echo "<li>Database file: ".(is_writeable($j->config->dbFile) ? "writeable" : "not writeable!")."</li>";
+					echo "<li>Database file: ".(is_writeable($j->dbFile) ? "writeable" : "not writeable!")."</li>";
 					echo "<li>Mail file: ".(is_writeable($j->config->mailFile) ? "writeable" : "not writeable!")."</li>";
 				}
 				echo $j->readCrontab();
 			?>
 		</p>
 	</div>
-<?php require("footer.php"); ?>
+<?php require_once("footer.php"); ?>
 
 

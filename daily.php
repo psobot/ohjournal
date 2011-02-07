@@ -1,4 +1,4 @@
 <?php
-	require("ohjournal.php");
+	require_once("ohjournal.php");
 	$j->sendDaily();
 ?>

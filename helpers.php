@@ -1,12 +1,15 @@
 <?php
-	class NumberToWord {
-		public static function toWords($number, $uppercase = false){
+	class TextHelper {
+		public static function numberToWords($number, $uppercase = false){
 			$numbers = array(	"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
 				"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "ninteen");
 			if ($number > 0 && $number < 20)		$number = $numbers[$number];
 			else if ($number > 20 && $number < 30)	$number = "twenty-" . $numbers[$number-20]; 
 			else if ($number > 30 && $number < 40)$number = "thirty-" . $numbers[$number-30];  
 			return ($uppercase ? ucwords($number) : $number);
+		}
+		public static function possessive($string){
+			return $string . "'" . (substr($string, -1) == "s" ? "" : "s");
 		}
 	}
 	class DateCompare {
@@ -37,16 +40,16 @@
 			if($dayDiff == 0) { 
 				if($diff < 60) return $diff.' seconds'; 
 				elseif($diff < 120)	return '1 minute'; 
-				elseif($diff < 3600) return NumberToWord::toWords(floor($diff/60)) . ' minutes'; 
+				elseif($diff < 3600) return TextHelper::numberToWords(floor($diff/60)) . ' minutes'; 
 				elseif($diff < 7200) return '1 hour'; 
-				elseif($diff < 86400) return NumberToWord::toWords(floor($diff/3600)) . ' hours'; 
+				elseif($diff < 86400) return TextHelper::numberToWords(floor($diff/3600)) . ' hours'; 
 			} elseif($dayDiff == 1) return 'yesterday';
-			elseif($dayDiff < 7) return NumberToWord::toWords($dayDiff) . ' days'; 
+			elseif($dayDiff < 7) return TextHelper::numberToWords($dayDiff) . ' days'; 
 			elseif($dayDiff == 7) return '1 week'; 
-			elseif($dayDiff < (7*6)) return "About " . NumberToWord::toWords(ceil($dayDiff/7)) . ' weeks'; 
-			elseif($dayDiff < 365) return "About " . NumberToWord::toWords(ceil($dayDiff/(365/12))) . ' months'; 
+			elseif($dayDiff < (7*6)) return "About " . TextHelper::numberToWords(ceil($dayDiff/7)) . ' weeks'; 
+			elseif($dayDiff < 365) return "About " . TextHelper::numberToWords(ceil($dayDiff/(365/12))) . ' months'; 
 			else { 
-				$years =  NumberToWord::toWords(round($dayDiff/365)); 
+				$years =  TextHelper::numberToWords(round($dayDiff/365)); 
 				return $years . ' year' . ($years != 1 ? 's' : ''); 
 			} 
 		} 

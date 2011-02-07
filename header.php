@@ -20,10 +20,10 @@
 				<div id="items">
 					<ul>
 						<?php if($j->isLoggedIn()){ ?>
-						<?php if($j->config->webRead){ ?><li class="read"><a href="./read.php">read</a></li><?php } ?>
-						<li class="write"><a href="./write.php">write</a></li>
-						<li class="settings"><a href="./manage.php">manage</a></li>
-						<li class="lock"><a href="./lock.php">lock</a></li>
+						<?php if($j->config->webRead){ ?><li class="read"><a href="./read">read</a></li><?php } ?>
+						<li class="write"><a href="./write">write</a></li>
+						<li class="settings"><a href="./manage">manage</a></li>
+						<li class="lock"><a href="./lock">lock</a></li>
 						<?php } ?>
 					</ul>
 				</div>

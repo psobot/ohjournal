@@ -1,26 +1,26 @@
 <?php
-	require("ohjournal.php");
-	$title = "Unlock " . (( $j->config->owner == "" ) ? "your" : $j->config->owner . "'s") . " journal.";
-	//TODO: move to class function
-	if($_POST['password'] && $j->login($_POST['password'])){
-		if($j->config->webRead)header("Location: ./read.php");
-		else header("Location: ./write.php");
-		die();
-	} else if ($j->isLoggedIn() && $j->config->webRead){
-		if($j->config->webRead)header("Location: ./read.php");
-		else header("Location: ./write.php");
-		die();
-	}
-	require("header.php");
+	//Routing code!
+	require_once("ohjournal.php");
+	
+	if($j->isAllowedIP($_SERVER['REMOTE_ADDR']) && ($j->isLoggedIn() || $j->login($_POST['password']))){
+		switch(strtolower($_GET['url'])){
+			case "lock":
+				require_once("lock.php");
+				break;
+			case "manage":
+				require_once("manage.php");
+				break;
+			case "write":
+				require_once("write.php");
+				break;
+			case NULL:
+				if($j->config->webRead) require_once("read.php");
+				else require_once("write.php");
+				break;				
+			default:
+				header("Location: ./");
+		}
+	} else if(!is_null($_GET['url'])) {
+		header("Location: ./");
+	} else require_once("login.php");
 ?>
-
-<h2><?php echo $title; ?></h2>
-	<div id="unlock">
-		<form action="./" method="post">
-			<input type="text" name="password" value="password" id="passwordHolder" />
-			<input type="password" name="password" value="password" id="password" />
-			<input type="submit" name="submit" value="unlock" />
-		</form>
-	</div>
-<?php require("footer.php"); ?>
-

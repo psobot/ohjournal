@@ -1,7 +1,9 @@
 <?php
-	require("ohjournal.php");
+	require_once("ohjournal.php");
 	$j->protect($j->config->webRead);
-	require("header.php");
+
+	$title = "Your Entries";
+	require_once("header.php");
 	$data = $j->getAllEntries();
 ?>
 <h2>Your Entries</h2>
@@ -26,7 +28,7 @@
 	foreach($data as $month => $days){
 		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>".
 				"<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over ";
-		if(date("n", strtotime($month)) == date("n"))	$b = date("j")  - ((time() < strtotime($j->config->emailTime)) ? 1 : 0);
+		if(date("n", strtotime($month)) == date("n"))	$b = date("j")  - (time() < strtotime($j->config->emailTime));
 		else $b = date("t", strtotime($month));
 
 		echo $b." day".(($b>1)?"s":"").". (".intval($a/$b * 100)."%)</h4>";
@@ -67,4 +69,4 @@
 		}
 	}
 ?>
-<?php require("footer.php"); ?>
+<?php require_once("footer.php"); ?>

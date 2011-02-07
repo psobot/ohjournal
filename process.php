@@ -1,5 +1,5 @@
 <?php
-	require("ohjournal.php");
+	require_once("ohjournal.php");
 	$raw = file_get_contents("php://stdin");
 	if($stdin == "")	$raw = $j->parseMailFile($j->getMail());
 	if(trim($raw) == "" || $raw == false)	return false;

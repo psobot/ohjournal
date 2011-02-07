@@ -1,12 +1,14 @@
 <?php
 	session_start();
-	require("helpers.php");
+	require_once("helpers.php");
 	class Journal{
 		public $db = null;
 		public $config = null;
 		public $entries = null;
+		public $dbFile = null;
 
 		function __construct($database = "journal.db"){
+			$this->dbFile = $database;
 			$this->db = new SQLite3(dirname(__FILE__)."/".$database);
 
 			$r = $this->db->query("select * from config");
@@ -20,11 +22,50 @@
 		function __destruct(){
 			$this->db->close();
 		}
-		public static function isAllowedIP($ip){
+		public function isAllowedIP($ip){
 			if($ip == "fe80::1" || $ip == "127.0.0.1" || empty($this->config->webIPs)) return true;
 			else return in_array($ip, $this->config->webIPs);
 		}
-		public function login($password){
+		public function isInstalled(){
+			return is_writeable($this->dbFile) && is_writeable($this->config->mailFile);
+		}
+		public function readCrontab(){
+			return trim(shell_exec("crontab -l -u ".$this->config->cronUser));
+		}
+		/*
+		*      Gets latest mail to the user by reading user's mail file
+		*      Usually in /var/mail/username, but can be set in config
+		*      This is, by all accounts, a dirty hack
+		*      Triggering an event on postfix receive is much, much better.
+		*
+		*      Returns the raw source of the email.
+		*/
+		public function getMail(){
+			$data = file_get_contents($this->config->mailFile);
+			if($data == NULL || trim($data) == "") return false;
+			return $data;
+		}
+		/*
+		*      Clears out the user's mailbox file.
+		*      Yes, you read that right.
+		*      Probably shouldn't be doing this. Could cause major problems.
+		*      Should change this to only delete the message passed in.
+		*/
+		public function deleteMail($mail = NULL){
+			if($mail == NULL){
+				$f = fopen($this->config->mailFile, 'w');
+				fwrite($f, "");
+				fclose($f);
+				return (trim(file_get_contents($this->config->mailFile)) == "");
+			} else {
+				$mailFileContents = file_get_contents($this->config->mailFile);
+				$f = fopen($this->config->mailFile, 'w');
+				$r = fwrite($f, str_replace($mail, "", $mailFileContents));
+				fclose($f);
+				return !($r == false);
+			}
+		}
+		public function login($password = ""){
 			if(!$this->isAllowedIP($_SERVER['REMOTE_ADDR'])) return false;
 			$query = "select count(*) as login from ".$this->config->tblUser." where password = '".md5($password)."'";
 			$r = $this->db->query($query);
@@ -94,7 +135,7 @@
 		public function countTotalDays(){
 			$count = 0;
 			foreach(array_keys($this->entries) as $month){
-				if(date("n", strtotime($month)) == date("n"))	$count += date("j") - ((time() > strtotime($this->config->emailTime)) ? 1 : 0);
+				if(date("n", strtotime($month)) == date("n")) $count += date("j") - (time() < strtotime($this->config->emailTime));
 				else $count += date("t", strtotime($month));
 			}
 			return $count;

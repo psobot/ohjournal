@@ -1,5 +1,5 @@
 <?php
-	require("ohjournal.php");
+	require_once("ohjournal.php");
 	$title = "New Entry";
 	$j->protect();
 	//TODO: move to class function
@@ -9,7 +9,7 @@
 		header("Location: ./read.php");
 		die();
 	}
-	require("header.php");
+	require_once("header.php");
 ?>
 
 <h2><?php echo $title; ?></h2>
@@ -20,6 +20,6 @@
 			<input type="submit" name="submit" value="save" />
 		</form>
 	</div>
-<?php require("footer.php"); ?>
+<?php require_once("footer.php"); ?>
 
 
