@@ -1,5 +1,5 @@
 body{
-	background: #ccc;
+	background: #ccc url("images/hatch.png");
 	font-family: 'Neuton';
 }
 ::selection {				background: 	#df6262;	}
@@ -31,6 +31,13 @@ h4.percent{
 	float: right;
 	margin-top: -58px;
 	color: #555;
+}
+a{
+	color: #444;
+}
+a:hover {
+	color: #db0000;
+	text-decoration: none;
 }
 #menu{
 	position: fixed;
@@ -83,6 +90,7 @@ h4.percent{
 #menu #items ul li.read a		{background: url("images/glass.png") 8px 8px no-repeat;}
 #menu #items ul li.settings a	{background: url("images/gear.png") 8px 8px no-repeat;}
 #menu #items ul li.lock a		{background: url("images/lock.png") 10px 8px no-repeat;}
+#menu #items ul li.download a	{background: url("images/download.png") 10px 8px no-repeat;}
 
 
 #menu #contact{
