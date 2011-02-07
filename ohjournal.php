@@ -194,7 +194,7 @@
 			$headers	=	'From: OhJournal <'.$this->config->fromEmail.'>' . "\r\n" .
 							'Reply-To: ' . $this->config->serverEmail . "\r\n" .
 							'X-Mailer: OhJournal from user <'.trim(shell_exec("whoami")).'> on PHP/' . phpversion();
-			return mail($this->config->yourEmail, $subject, $body, $headers);
+			return mail($this->config->userEmail, $subject, $body, $headers);
 		}
 	}
 	$j = new Journal();
