@@ -22,6 +22,9 @@
 		function __destruct(){
 			$this->db->close();
 		}
+		public function responseEmail(){
+			return preg_replace("/\+.+@/", "@", $this->userEmail);
+		}
 		public function isAllowedIP($ip){
 			if($ip == "fe80::1" || $ip == "127.0.0.1" || empty($this->config->webIPs)) return true;
 			else return in_array($ip, $this->config->webIPs);
