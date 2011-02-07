@@ -15,7 +15,7 @@
 	<body>
 		<div id="menu">
 			<div id="menu_content">
-				<div id="logo"><h1>OhJournal</h1></div>
+				<div id="logo"><a href="./"><h1>OhJournal</h1></a></div>
 				<div id="items">
 					<ul>
 						<?php if($j->isLoggedIn()){ ?>
