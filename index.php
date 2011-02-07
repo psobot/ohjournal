@@ -4,8 +4,6 @@
 	
 	if(		$j->isAllowedIP($_SERVER['REMOTE_ADDR']) 
 		&& ($j->isLoggedIn() || (isset($_POST['password']) && $j->login($_POST['password'])))){
-		var_dump(strtolower($_GET['url']));
-		die();
 		switch(strtolower($_GET['url'])){
 			case "lock":
 				require_once("lock.php");
