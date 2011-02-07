@@ -1,5 +1,5 @@
 <?php
-	require_once("ohjournal.php");
+//	require_once("ohjournal.php");
 	$title = "Unlock " . (( $j->config->owner == "" ) ? "your" : TextHelper::possessive($j->config->owner)) . " journal.";
 	require_once("header.php");
 ?>
