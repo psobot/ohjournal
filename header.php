@@ -1,4 +1,4 @@
-<?php $j->logVisit(); ?>
+<?php //$j->logVisit(); ?>
 <!DOCTYPE html>
 <html>
 	<head>
