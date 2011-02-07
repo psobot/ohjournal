@@ -21,6 +21,13 @@ $(document).ready(function(){
 		$(this).siblings(".up").fadeToggle();
 		$(this).siblings(".down").fadeOut();
 	});
+	$("#showall").click(function(e){
+		e.preventDefault();
+		$(".body").slideToggle();
+		$(".entry").toggleClass("active");
+		$(".up").fadeToggle();
+		$(".down").fadeOut();
+	});
 	$(".up").click(function(e){
 		e.preventDefault();
 		$(this).siblings(".body").slideToggle();

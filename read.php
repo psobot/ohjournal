@@ -7,6 +7,7 @@
 	$data = $j->getAllEntries();
 ?>
 <h2>Your Entries</h2>
+<h4 class='percent'><a href="#" id="showall">show/hide all entries</a></h4>
 <h3 class="percent">
 	<?php echo $a = $j->countDays(); ?> 
 	entr<?php echo ($a>1)?"ies":"y"; ?> over 
