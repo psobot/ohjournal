@@ -150,7 +150,7 @@
 			if($raw === false) return false;
 			$s = array(	".", 	"+"		);
 			$r = array(	"\.", 	"\+"	);
-			$m = preg_match("/^(From ".str_replace(".", "\.", $this->config->responseEmail()).".+)(^From )?/ms", $raw, $matches);
+			$m = preg_match("/^(From ".str_replace(".", "\.", $this->responseEmail()).".+)(^From )?/ms", $raw, $matches);
 			if($m)	return trim($matches[1]);
 			else return null;
 		}
