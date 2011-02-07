@@ -9,10 +9,7 @@ function changeHash(hash){
 }
 $(document).ready(function(){
 	$(".scroll").click(function(event){
-		var full_url = this.href;
-		var parts = full_url.split("#");
-		var trgt = parts[1];
-		var target_offset = $("#"+trgt).offset();
+		var target_offset = $(window.location.hash).offset();
 		var target_top = target_offset.top;
 		$('html, body').animate({scrollTop:target_top}, 750, "easeInOutQuad");
 	});
@@ -47,5 +44,11 @@ $(document).ready(function(){
 		$(this).remove();
 		$("#password").show().focus();
 	});
+	if(window.location.hash != ""){
+		var target_offset = $(window.location.hash).offset();
+		var target_top = target_offset.top;
+		$('html, body').animate({scrollTop:target_top}, 750, "easeInOutQuad");
+		$(window.location.hash + " .bar").click();
+	}
 });
 
