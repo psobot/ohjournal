@@ -6,7 +6,7 @@
 	if(	isset($_POST['body']) && 
 		trim($_POST['body']) != "" && 
 		$j->submitEntry(date("U"), date("U"), "Submitted online with OhJournal.", $_POST['body'])){
-		header("Location: ./read.php");
+		header("Location: ./");
 		die();
 	}
 	require_once("header.php");

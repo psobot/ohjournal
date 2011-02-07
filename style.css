@@ -4,7 +4,7 @@ body{
 }
 ::selection {				background: 	#df6262;	}
 ::-moz-selection {			background: 	#df6262;	}
-textarea{					outline-color: 	#df6262; }
+textarea{					outline-color: 	#df6262; 	font-size: 16px;	}
 textarea::selection {		background: 	#df6262; 	}
 textarea::-moz-selection 	{background: 	#df6262; 	}
 
