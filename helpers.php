@@ -29,7 +29,8 @@
 		 *	Ported to PHP >= 5.1 by Zach Leatherman (zachleat.com)
 		 *
 		 */	
-		public static function differenceInWords(DateTime $date, $compareTo = NULL) {
+		public static function differenceInWords($date, $compareTo = NULL) {
+			$date = new DateTime($date);
 			if(!is_null($compareTo)) $compareTo = new DateTime($compareTo); 
 			else $compareTo = new DateTime('now'); 
 			$diff = $compareTo->format('U') - $date->format('U'); 
