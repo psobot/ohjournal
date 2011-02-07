@@ -36,7 +36,7 @@
 		foreach($days as $day => $entries){
 			$sent = date($j->config->webDate, strtotime($day));
 ?>
-	<div class="entry">
+	<div class="entry" id="<?php echo $day ?>">
 		<a href="#" class="down button"></a>
 		<a href="#" class="up button"></a>
 		<div class="bar">

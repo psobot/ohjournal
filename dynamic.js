@@ -2,10 +2,13 @@ jQuery.easing['jswing'] = jQuery.easing['swing'];
 jQuery.extend( jQuery.easing,{ def: 'easeInOutSine',
 	easeInOutQuad: function (x, t, b, c, d) { if ((t/=d/2) < 1) return c/2*t*t + b;	return -c/2 * ((--t)*(t-2) - 1) + b; },
 	easeInOutSine: function (x, t, b, c, d) { return -c/2 * (Math.cos(Math.PI*t/d) - 1) + b; }});
-
+function changeHash(hash){
+	$("#"+hash).attr("id", hash+"_");
+	window.location.hash = hash;
+	$("#"+hash+"_").attr("id", hash);
+}
 $(document).ready(function(){
 	$(".scroll").click(function(event){
-		event.preventDefault();
 		var full_url = this.href;
 		var parts = full_url.split("#");
 		var trgt = parts[1];
@@ -20,6 +23,7 @@ $(document).ready(function(){
 		$(this).parent().toggleClass("active");
 		$(this).siblings(".up").fadeToggle();
 		$(this).siblings(".down").fadeOut();
+		changeHash($(this).parent().attr("id"));
 	});
 	$("#showall").click(function(e){
 		e.preventDefault();
