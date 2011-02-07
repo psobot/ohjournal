@@ -23,7 +23,8 @@
 			default:
 				header("Location: ./");
 		}
-	} else if(!is_null($_GET['url'])) {
+	} die();/*else if(!is_null($_GET['url'])) {
 		header("Location: ./");
 	} else require_once("login.php");
+	*/
 ?>
