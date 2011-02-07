@@ -24,7 +24,7 @@
 		?>
 	</p>
 </div>
-<?php 
+<?php
 	foreach($data as $month => $days){
 		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>".
 				"<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over ";
@@ -53,7 +53,7 @@
 					<?php 
 						if(DateCompare::daysApart($row['received'], $row['sent']) == 0) echo date("g:i a", strtotime($row['received']));
 						else echo date("g:i a", strtotime($row['received'])) . 
-								(($d = DateCompare::daysApart($row['received'], $row['sent'])) == 1 ? " the next day" : " ".NumberToWord::toWords($d)." days later");
+								(($d = DateCompare::daysApart($row['received'], $row['sent'])) == 1 ? " the next day" : " ".TextHelper::numberToWords($d)." days later");
 					?>
 					</div>
 				<?php
