@@ -4,24 +4,19 @@ Created & Maintained: 	Peter Sobot <hi@petersobot.com>
 =================
 
 This script is definitely not very easy to set up... but here's some instructions
-Note: you'll need a Linux server with PHP5-CLI installed, and with the ability to send mail.
+Note: you'll need a Linux server with PHP5-CLI, postfix installed, and with the ability to send mail.
 Also, it's easiest to use this with a gmail account to properly filter your messages.
 
 1) Add a line to your crontab (by using crontab -e) to call:
 	/path/to/run.sh
    whenever you want to recieve your email.
-   Make sure your server has the correct time zone!
+2) Add a postfix filter/trigger to push incoming messages to a certain email address to:
+	/path/to/process.php
+3) Chmod the entire OhJournal folder and your journal.db to give PHP write access.
+4) Create the proper database schema. (I forgot to commit a blank one! Will do asap!)
+5) ???
+6) Create proper tutorial or installation script. (that's a todo for me...)
+7) ???
+8) Profit!
 
-2) Configure daily.php with your email address
-3) Set up a Gmail filter to filter all emails coming in from "ohjournalresponse"
-	-	I have it set up to archive and mark as read, but you can do whatever you want with them.
-4) You're done!
-
-
-
-Major todos:
-	-	Add web interface
-	-	Actually add a reciever for your emails
-		-	e.g.: keep the responses local, rather than using your mail inbox as a database
-	-	Do a bunch of other cool stuff.
-	-	Plenty of work and UI and awesome!
+Apologies for the incomplete installation tutorial and lack of a script yet. That'll be done asap.
