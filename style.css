@@ -178,26 +178,6 @@ textarea#body{
 	text-align: center;
 	position: relative;
 }
-.entry .down {
-	background: url("images/down.png") bottom center no-repeat;
-	display: none;
-	height: 19px;
-	width: 14px;
-	position: absolute;
-	top: 8px;
-	left: 10px;
-	z-index: 999;
-}
-.entry .up {
-	background: url("images/up.png") bottom center no-repeat;
-	display: none;
-	height: 19px;
-	width: 14px;
-	position: absolute;
-	top: 8px;
-	left: 10px;
-	z-index: 999;
-}
 .entry .delete {
 	background: url("images/x_grey.png") bottom center no-repeat;
 	display: none;
@@ -208,10 +188,8 @@ textarea#body{
 	right: 10px;
 	z-index: 999;
 }
-.entry .bar:hover, .entry .arrow:hover, .entry .delete:hover {
-	cursor: hand;
-}
-.entry.active .bar:hover {	cursor: default;	}
+.entry .bar:hover {	cursor: pointer; background: url("images/down.png") 10px 10px no-repeat;	}
+.entry.active .bar:hover {	cursor: pointer; background: url("images/up.png") 10px 8px no-repeat;		}
 .entry .received {
 	color: #ccc;
 	font-size: 12px;
@@ -225,4 +203,5 @@ textarea#body{
 	padding: 10px;
 	border-top: 1px solid #ccc;
 	font-size: 14px;
+	line-height: 25px;
 }

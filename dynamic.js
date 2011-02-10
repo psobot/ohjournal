@@ -18,27 +18,18 @@ $(document).ready(function(){
 		e.preventDefault();
 		$(this).siblings(".body").slideToggle();
 		$(this).parent().toggleClass("active");
-		$(this).siblings(".up").fadeToggle();
-		$(this).siblings(".down").fadeOut();
 		changeHash($(this).parent().attr("id"));
 	});
 	$("#showall").click(function(e){
 		e.preventDefault();
-		$(".body").slideToggle();
+		$(".body").toggle();
 		$(".entry").toggleClass("active");
-		$(".up").fadeToggle();
-		$(".down").fadeOut();
 	});
 	$(".up").click(function(e){
 		e.preventDefault();
 		$(this).siblings(".body").slideToggle();
 		$(this).parent().toggleClass("active");
 		$(this).fadeToggle();
-	});
-	$(".bar").hover(function(){
-		if(!$(this).siblings(".body").is(":visible"))$(this).siblings(".down").show();
-	}, function(){
-		if(!$(this).siblings(".body").is(":visible"))$(this).siblings(".down").hide();
 	});
 	$("#passwordHolder").focus(function(){
 		$(this).remove();
