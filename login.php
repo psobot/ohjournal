@@ -3,7 +3,6 @@
 	$title = "Unlock " . (( $j->config->owner == "" ) ? "your" : TextHelper::possessive($j->config->owner)) . " journal.";
 	require_once("header.php");
 ?>
-
 <h2><?php echo $title; ?></h2>
 <!-- Optional subheader line goes here. -->
 	<div id="unlock">
