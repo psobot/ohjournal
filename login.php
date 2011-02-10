@@ -5,6 +5,7 @@
 ?>
 
 <h2><?php echo $title; ?></h2>
+<!-- Optional subheader line goes here. -->
 	<div id="unlock">
 		<form action="./" method="post">
 			<input type="text" name="password" value="password" id="passwordHolder" />
