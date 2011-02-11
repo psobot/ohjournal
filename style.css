@@ -205,3 +205,45 @@ textarea#body{
 	font-size: 14px;
 	line-height: 25px;
 }
+.error {
+	background: rgb(255, 0, 0);
+	background: rgba(255, 0, 0, 0.2);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ff0000, endColorstr=#33ff0000);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ff0000, endColorstr=#33ff0000)";
+	padding: 10px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	margin: 10px 0;
+}
+.error h4{
+	text-align: left;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+.error p{
+	margin: 0;
+	padding: 0;
+}
+.success {
+	background: rgb(0, 255, 0);
+	background: rgba(0, 255, 0, 0.2);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3300ff00, endColorstr=#3300ff00);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#3300ff00, endColorstr=#3300ff00)";
+	padding: 10px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	margin: 10px 0;
+}
+.success h4{
+	text-align: left;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+.success p{
+	margin: 0;
+	padding: 0;
+}

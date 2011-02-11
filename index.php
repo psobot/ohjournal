@@ -2,8 +2,12 @@
 	//Routing code!
 	require_once("ohjournal.php");
 	
-	if(		$j->isAllowedIP($_SERVER['REMOTE_ADDR']) 
-		&& ($j->isLoggedIn() || (isset($_POST['password']) && $j->login($_POST['password'])))){
+	if($_GET['url'] == "install" && !$j->isInstalled()){
+		require_once("install.php");
+	} else if(!$j->isInstalled()){
+		header("Location: ./install");
+	} else if(	$j->isAllowedIP($_SERVER['REMOTE_ADDR']) 
+			&& ($j->isLoggedIn() || (isset($_POST['password']) && $j->login($_POST['password'])))){
 		switch(strtolower($_GET['url'])){
 			case "lock":
 				require_once("lock.php");

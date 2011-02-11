@@ -1,26 +1,37 @@
 <?php
 	session_start();
 	require_once("helpers.php");
+	class NotInstalledException extends Exception {}
+
 	class Journal{
 		public $db = null;
+		public $installed = false;
 		public $config = null;
 		public $entries = null;
 		public $dbFile = null;
 
 		function __construct($database = "journal.db"){
 			$this->dbFile = $database;
-			$this->db = new SQLite3(dirname(__FILE__)."/".$database);
-
-			$r = $this->db->query("select * from config");
+			if($this->isInstalled()){
+				$this->db = new SQLite3(dirname(__FILE__)."/".$this->dbFile);
+			} else return;
+			$this->initConfig();
+		}
+		function __destruct(){
+			if($this->isInstalled()) $this->db->close();
+		}
+		public function initConfig(){
+			$r = @$this->db->query("select * from config");
+			if(!$r) return false;
 			while($v = $r->fetchArray()) $this->config->$v[1] = $v[2];
 			
-			$r = $this->db->query("select * from ".$this->config->tblIPs);
+			$r = @$this->db->query("select * from ".$this->config->tblIPs);
+			if(!$r) return false;
 			while($v = $r->fetchArray()) $this->config->webIPs[] = $v[1];
 
 			date_default_timezone_set($this->config->timezone);
-		}
-		function __destruct(){
-			$this->db->close();
+
+			return !empty($this->config);
 		}
 		public function responseEmail(){
 			return preg_replace("/\+.+@/", "@", $this->userEmail);
@@ -30,10 +41,19 @@
 			else return in_array($ip, $this->config->webIPs);
 		}
 		public function isInstalled(){
-			return is_writeable($this->dbFile) && is_writeable($this->config->mailFile);
+			return is_writeable($this->dbFile);
 		}
-		public function readCrontab(){
-			return trim(shell_exec("crontab -l -u ".$this->config->cronUser));
+		public function createDatabase(&$error){
+			if($this->isInstalled() && !empty($this->config)){ $error = "OhJournal is already installed."; return true; }
+			$this->dbFile = "journal.db";
+			$this->db = new SQLite3(dirname(__FILE__)."/".$this->dbFile);
+			if(!$this->db){ $error = "Database file creation failed!"; return false; }
+			else {
+				if(!file_exists("schema.sql")){ $error = "Missing schema definition file!"; return false; }
+				$this->db->query(file_get_contents("schema.sql"));
+				$this->initConfig();
+			}
+			return true;
 		}
 		/*
 		*      Gets latest mail to the user by reading user's mail file
