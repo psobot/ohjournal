@@ -5,18 +5,26 @@ Created & Maintained: 	Peter Sobot <hi@petersobot.com>
 
 This script is definitely not very easy to set up... but here's some instructions
 Note: you'll need a Linux server with PHP5-CLI, postfix installed, and with the ability to send mail.
-Also, it's easiest to use this with a gmail account to properly filter your messages.
+It has been tested on an Ubuntu server, but nothing else.
 
+
+======	Manual Installation:
 1) Add a line to your crontab (by using crontab -e) to call:
 	/path/to/run.sh
    whenever you want to recieve your email.
 2) Add a postfix filter/trigger to push incoming messages to a certain email address to:
 	/path/to/process.php
 3) Chmod the entire OhJournal folder and your journal.db to give PHP write access.
-4) Create the proper database schema. (I forgot to commit a blank one! Will do asap!)
-5) ???
-6) Create proper tutorial or installation script. (that's a todo for me...)
 7) ???
 8) Profit!
 
-Apologies for the incomplete installation tutorial and lack of a script yet. That'll be done asap.
+======	"Automatic" Installation:
+1) Have a Linux system running Postfix with no crazy custom configuration and a domain name.
+2) Run ./install.php from command line and hope everything works properly.
+3) Visit the non-existent-yet configuration page from the frontend to setup the necessary settings.
+	(alternatively, muck around in the "config" database table yourself)
+4) ???
+5) Profit!
+
+I've made the installer script relatively verbose and easy to read, so if something goes wrong, its changes should be easy to reverse by hand.
+An uninstaller script is in the works.
