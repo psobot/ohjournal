@@ -47,7 +47,6 @@
 			$body = trim(preg_replace("/[\n]/", "<br />", $row['entry']));
 	?>
 			<div class="body">
-				<?php if($row['received'] != $row['sent']){ ?>
 					<div class="received">
 					<?php 
 						if(DateCompare::daysApart($row['received'], $row['sent']) == 0) echo date("g:i a", strtotime($row['received']));
@@ -56,7 +55,6 @@
 					?>
 					</div>
 				<?php
-					}
 					echo $body; 
 				?>
 			</div>
