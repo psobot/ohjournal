@@ -10,7 +10,8 @@
 		public $entries = null;
 		public $dbFile = null;
 
-		function __construct($database = dirname(__FILE__)."/"."journal.db"){
+		function __construct($database = NULL){
+			if($database == NULL) $database = dirname(__FILE__)."/"."journal.db";
 			$this->dbFile = $database;
 			if($this->isInstalled()){
 				$this->db = new SQLite3($this->dbFile);
