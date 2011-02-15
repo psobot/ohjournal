@@ -34,7 +34,7 @@
 			return !empty($this->config);
 		}
 		public function responseEmail(){
-			return preg_replace("/\+.+@/", "@", $this->userEmail);
+			return preg_replace("/\+.+@/", "@", $this->config->userEmail);
 		}
 		public function isAllowedIP($ip){
 			if($ip == "fe80::1" || $ip == "127.0.0.1" || empty($this->config->webIPs)) return true;
