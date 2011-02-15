@@ -10,11 +10,14 @@
 		public $entries = null;
 		public $dbFile = null;
 
-		function __construct($database = "journal.db"){
+		function __construct($database = dirname(__FILE__)."/"."journal.db"){
 			$this->dbFile = $database;
 			if($this->isInstalled()){
-				$this->db = new SQLite3(dirname(__FILE__)."/".$this->dbFile);
-			} else return;
+				$this->db = new SQLite3($this->dbFile);
+			} else {
+				fwrite(STDERR, "Database error - could not write to Database file!");
+				exit(1);
+			}
 			$this->initConfig();
 		}
 		function __destruct(){
