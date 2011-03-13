@@ -41,11 +41,11 @@
 			if($dayDiff == 0) { 
 				if($diff < 60) return $diff.' seconds'; 
 				elseif($diff < 120)	return '1 minute'; 
-				elseif($diff < 3600) return TextHelper::numberToWords(floor($diff/60)) . ' minutes'; 
+				elseif($diff < 3600) return ucwords(TextHelper::numberToWords(floor($diff/60))) . ' minutes'; 
 				elseif($diff < 7200) return '1 hour'; 
-				elseif($diff < 86400) return TextHelper::numberToWords(floor($diff/3600)) . ' hours'; 
+				elseif($diff < 86400) return ucwords(TextHelper::numberToWords(floor($diff/3600))) . ' hours'; 
 			} elseif($dayDiff == 1) return 'yesterday';
-			elseif($dayDiff < 7) return TextHelper::numberToWords($dayDiff) . ' days'; 
+			elseif($dayDiff < 7) return ucwords(TextHelper::numberToWords($dayDiff)) . ' days'; 
 			elseif($dayDiff == 7) return '1 week'; 
 			elseif($dayDiff < (7*6)) return "About " . TextHelper::numberToWords(ceil($dayDiff/7)) . ' weeks'; 
 			elseif($dayDiff < 365) return "About " . TextHelper::numberToWords(ceil($dayDiff/(365/12))) . ' months'; 
