@@ -200,10 +200,11 @@ textarea#body{
 }
 .entry .body{
 	display: none;
-	padding: 10px;
-	border-top: 1px solid #ccc;
+	padding: 4px;
+	border-top: 1px solid #efefef;
 	font-size: 14px;
 	line-height: 25px;
+	margin: 0 6px 6px;
 }
 .error {
 	background: rgb(255, 0, 0);
