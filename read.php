@@ -27,12 +27,9 @@
 </div>
 <?php
 	foreach($data as $month => $days){
-		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>".
-				"<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over ";
-		if(date("n", strtotime($month)) == date("n"))	$b = date("j")  - (time() < strtotime($j->config->emailTime));
-		else $b = date("t", strtotime($month));
-
-		echo $b." day".(($b>1)?"s":"").". (".intval($a/$b * 100)."%)</h4>";
+		echo "<h3 id='".date("Y-n", strtotime($month))."'>".date("F Y", strtotime($month))."</h3>";
+		$b = $j->countTotalDays($month);
+		echo "<h4 class='percent'>".($a = count($days))." response".(($a>1)?"s":"")." over $b day".(($b>1)?"s":"").". (".intval($a/$b * 100)."%)</h4>";
 		foreach($days as $day => $entries){
 			$sent = date($j->config->webDate, strtotime($day));
 ?>
