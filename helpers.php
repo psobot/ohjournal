@@ -20,39 +20,53 @@
 				return abs((date("z", $two) + 365*(date("Y", $two) - date("Y", $one))) - date("z", $one));
 			else return abs(date("z", $one) - date("z", $two));
 		}
-		/**
-		 *	Converts a timestamp to pretty human-readable format.
-		 * 
-		 *	Original JavaScript Created By John Resig (jquery.com)  Copyright (c) 2008
-		 *	Copyright (c) 2008 John Resig (jquery.com)
-		 *	Licensed under the MIT license.
-		 *	Ported to PHP >= 5.1 by Zach Leatherman (zachleat.com)
-		 *
-		 */	
-		public static function differenceInWords($date, $compareTo = NULL) {
-			$date = new DateTime($date);
-			if(!is_null($compareTo)) $compareTo = new DateTime($compareTo); 
-			else $compareTo = new DateTime('now'); 
-			$diff = $compareTo->format('U') - $date->format('U'); 
+		public static function differenceInWords($date, $compareTo = NULL, $uppercase = true) {
+			if(!is_null($compareTo)) $compareTo = strtotime($compareTo); 
+			else $compareTo = date('U');
+
+			if(!is_numeric($date)) $date = strtotime($date);							
+			
+			$diff = $compareTo - $date; 
 			$dayDiff = floor($diff / 86400); 
-	
-			if(is_nan($dayDiff) || $dayDiff < 0) return ''; 
-					 
-			if($dayDiff == 0) { 
-				if($diff < 60) return $diff.' seconds'; 
-				elseif($diff < 120)	return '1 minute'; 
-				elseif($diff < 3600) return ucwords(TextHelper::numberToWords(floor($diff/60))) . ' minutes'; 
-				elseif($diff < 7200) return '1 hour'; 
-				elseif($diff < 86400) return ucwords(TextHelper::numberToWords(floor($diff/3600))) . ' hours'; 
-			} elseif($dayDiff == 1) return 'yesterday';
-			elseif($dayDiff < 7) return ucwords(TextHelper::numberToWords($dayDiff)) . ' days'; 
-			elseif($dayDiff == 7) return '1 week'; 
-			elseif($dayDiff < (7*6)) return "About " . TextHelper::numberToWords(ceil($dayDiff/7)) . ' weeks'; 
-			elseif($dayDiff < 365) return "About " . TextHelper::numberToWords(ceil($dayDiff/(365/12))) . ' months'; 
-			else { 
-				$years =  TextHelper::numberToWords(round($dayDiff/365)); 
-				return $years . ' year' . ($years != 1 ? 's' : ''); 
-			} 
+			
+			$r = "";
+
+			if($dayDiff < 1) {
+				if(!$diff)				$r = 'just now';
+				else if($diff < 60) 	$r = $diff.' seconds ago'; 
+				elseif($diff < 120)		$r = 'one minute ago'; 
+				elseif($diff < 3600) 	$r = TextHelper::numberToWords(floor($diff/60)) . ' minutes ago'; 
+				elseif($diff < 7200) 	$r = 'one hour ago'; 
+				elseif($diff < 86400) 	$r = TextHelper::numberToWords(floor($diff/3600)) . ' hours ago'; 
+			} elseif($dayDiff == 1) 	$r = 'yesterday';
+			elseif($dayDiff < 7) 		$r = TextHelper::numberToWords($dayDiff) . ' days ago'; 
+			elseif($dayDiff == 7) 		$r = 'one week ago'; 
+			elseif($dayDiff < 30){
+				$round = ceil($dayDiff/7);
+				if(!($round - ($dayDiff/7))) $r = TextHelper::numberToWords(ceil($dayDiff/7));
+				else if($round - ($dayDiff/7) < 0.5) $r = "more than ".TextHelper::numberToWords(--$round);
+				else $r = "just over ".TextHelper::numberToWords(--$round);
+				$r .= ' week'.($round != 1 ? 's' : '').' ago';
+			}elseif($dayDiff < 355){
+				$round = ceil($dayDiff*12/365);
+				if(!($round - ($dayDiff*12/365))) $r = TextHelper::numberToWords($round);	
+				else if($round - ($dayDiff*12/365) < 0.33) $r = 'nearly '.TextHelper::numberToWords($round);
+				else if($round - ($dayDiff*12/365) < 0.66) $r = 'more than '.TextHelper::numberToWords(--$round);
+				else $r = 'just over '.TextHelper::numberToWords(--$round);
+				$r .= ' month' . ($round != 1 ? 's' : '') . ' ago';
+			} else {
+				$round = ceil($dayDiff/365);
+				$plural = false;
+				if($round - $dayDiff/365 < 0.33) $r = 'nearly '.TextHelper::numberToWords($round);
+				else if($round - $dayDiff/365 < 0.5){ $r = 'about '.TextHelper::numberToWords(--$round).' and a half'; $plural = true;}
+				else if($round - $dayDiff/365 < 0.75) $r = 'more than '.((--$round == 1) ? 'a' : TextHelper::numberToWords($round));
+				else if($round - $dayDiff/365 < 1) $r = 'just over '.((--$round == 1) ? 'a' : TextHelper::numberToWords($round));
+				else $r = 'almost '.TextHelper::numberToWords(--$round);
+				$r .= ' year' . ($round != 1 || $plural ? 's' : '') . ' ago'; 
+			}
+			
+			if($uppercase) return ucfirst($r);
+			else return $r;
 		} 
 	}
 ?>
