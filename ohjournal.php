@@ -159,11 +159,23 @@
 				foreach($days as $day => $entries) $count += count($entries);
 			return $count;
 		}
-		public function countTotalDays(){
+
+		/*
+		 *	TODO: Fix this function. It is filled with dirty (kinda pointless) hacks.
+		 */
+		public function countTotalDays($m = NULL){
 			$count = 0;
-			foreach(array_keys($this->entries) as $month){
-				if(date("n", strtotime($month)) == date("n")) $count += date("j") - (time() < strtotime($this->config->emailTime));
+			$first = true;
+			foreach(array_reverse(array_keys($this->entries)) as $month){
+				if($month == $m) $count = 0;
+				if($first){
+					$first = array_keys(array_reverse($this->entries[$month]));
+					$first = explode("-", $firstmonth[0]);
+					$count += date("n", strtotime($month)) - $first[2] - 1;
+					$first = false;
+				} else if(date("n", strtotime($month)) == date("n")) $count += date("j") - (time() < strtotime($this->config->emailTime));
 				else $count += date("t", strtotime($month));
+				if($month == $m) break;
 			}
 			return $count;
 		}
@@ -212,7 +224,7 @@
 			if($past != false)
 				$body .= 	"\r\n\r\n\r\n".
 							$this->config->rememberText." ".
-							DateCompare::differenceInWords($past['received']).' ago'.
+							DateCompare::differenceInWords($past['received']).
 							" (on ".
 							date("l, F jS, Y", strtotime($past['received'])).
 							") you wrote:\r\n\r\n".
