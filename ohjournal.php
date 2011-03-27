@@ -3,7 +3,7 @@
 	require_once("helpers.php");
 	class NotInstalledException extends Exception {}
 
-	$version = "0.5";
+	$version = "0.6";
 
 	class Journal{
 		public $db = null;

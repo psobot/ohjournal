@@ -91,6 +91,7 @@ a:hover {
 }
 #menu #items ul li.write a      {background: url("images/pen.png") 8px 6px no-repeat;}
 #menu #items ul li.read a       {background: url("images/glass.png") 8px 6px no-repeat;}
+#menu #items ul li.stats a       {background: url("images/pie.png") 8px 6px no-repeat;}
 #menu #items ul li.settings a   {background: url("images/gear.png") 8px 6px no-repeat;}
 #menu #items ul li.lock a       {background: url("images/lock.png") 10px 6px no-repeat;}
 #menu #items ul li.download a   {background: url("images/download.png") 10px 6px no-repeat;}
@@ -119,6 +120,8 @@ a:hover {
     line-height: 14px;
     font-size: 12px;
 }
+#menu #footer #version:hover {opacity: 0.75;}
+
 #content{
     width: 700px;
     margin: 0 auto;
@@ -255,4 +258,6 @@ textarea#body{
     margin: 0;
     padding: 0;
 }
-
+.chart{
+	margin: 10px 0;
+}

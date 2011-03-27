@@ -26,7 +26,7 @@
 						<?php if($j->config->webRead){ ?><li class="read"><a href="./read">read</a></li><?php } ?>
 						<li class="write"><a href="./write">write</a></li>
 						<li class="settings"><a href="./manage">manage</a></li>
-						<?php if($j->config->webRead){ ?><li class="read"><a href="./stats">stats</a></li><?php } ?>
+						<?php if($j->config->webRead){ ?><li class="stats"><a href="./stats">stats</a></li><?php } ?>
 						<li class="lock"><a href="./lock">lock</a></li>
 						<?php } ?>
 					</ul>
