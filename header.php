@@ -30,7 +30,11 @@
 				</div>
 				<div id="contact">developed by <a href="http://www.petersobot.com">Peter Sobot</a></div>
 			</div>
-			<div id="footer"></div>
+			<div id="footer">
+				<div id="version">
+					version <?php echo $version; ?>
+				</div>
+			</div>
 		</div>
 		<div id="content">
 

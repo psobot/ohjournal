@@ -1,250 +1,258 @@
 body{
-	background: #ccc url("images/hatch.png");
-	font-family: 'Neuton';
+    background: #ccc url("images/hatch.png");
+    font-family: 'Neuton';
 }
-::selection {				background: 	#df6262;	}
-::-moz-selection {			background: 	#df6262;	}
-textarea{					outline-color: 	#df6262; 	font-size: 16px;	}
-textarea::selection {		background: 	#df6262; 	}
-textarea::-moz-selection 	{background: 	#df6262; 	}
+::selection {               background:     #df6262;    }
+::-moz-selection {          background:     #df6262;    }
+textarea{                   outline-color:  #df6262;    font-size: 16px;    }
+textarea::selection {       background:     #df6262;    }
+textarea::-moz-selection    {background:    #df6262;    }
 
 h2{
-	text-align: center;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #aaa;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #aaa;
 }
 h3{
-	text-align: center;
-	padding-bottom: 10px;
-	border-bottom: 1px solid #aaa;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #aaa;
 }
 h3.percent{
-	border-bottom: none;
+    border-bottom: none;
 }
-h3.left{	text-align: left; }
-h3.normal{	font-weight: normal; }
+h3.left{    text-align: left; }
+h3.normal{  font-weight: normal; }
 h4{
-	text-align: center;
-	font-weight: normal;
+    text-align: center;
+    font-weight: normal;
 }
 h4.percent{
-	float: right;
-	margin-top: -53px;
-	color: #555;
+    float: right;
+    margin-top: -53px;
+    color: #555;
 }
 h4 a{
-	text-decoration: none;
+    text-decoration: none;
 }
 a{
-	color: #444;
+    color: #444;
 }
 a:hover {
-	color: #db0000;
-	text-decoration: none;
+    color: #db0000;
+    text-decoration: none;
 }
 #menu{
-	position: fixed;
-	left: 20px;
-	top: 0px;
-	width: 140px;
-	display: block;
-	color: #fff;
+    position: fixed;
+    left: 20px;
+    top: 0px;
+    width: 140px;
+    display: block;
+    color: #fff;
 }
 #menu_content{
-	width: 130px;
-	display: block;
-	background: url("images/ribbon_01.png") bottom center no-repeat;
-	color: #fff;
-	margin: 0;
-	padding: 20px 0 0 10px;
+    width: 130px;
+    display: block;
+    background: url("images/ribbon_01.png") bottom center no-repeat;
+    color: #fff;
+    margin: 0;
+    padding: 20px 0 0 10px;
 }
 #menu #logo h1{
-	text-indent: -1000px;
-	background: url("images/ohjournal.png") no-repeat;
-	height: 28px;
-	width: 106px;
-	display: block;
-	margin-left:6px;
+    text-indent: -1000px;
+    background: url("images/ohjournal.png") no-repeat;
+    height: 28px;
+    width: 106px;
+    display: block;
+    margin-left:6px;
 }
 #menu #items ul{
-	padding: 0;
-	margin: 0;
+    padding: 0;
+    margin: 0;
 }
 #menu #items ul li{
-	list-style-type: none;
+    list-style-type: none;
 }
 #menu #items ul li a{
-	list-style-type: none;
-	width: 74px;
-	margin: 0 3px;
-	border-bottom: 1px solid #db0000;
-	padding: 5px 0 5px 40px;
-	display: block;
-	color: #fff;
-	text-decoration: none;
+    list-style-type: none;
+    width: 74px;
+    margin: 0 3px;
+    border-bottom: 1px solid #db0000;
+    padding: 5px 0 5px 40px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
 }
 #menu #items ul li a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 #menu #items ul li:first-child a{
-	border-top: 1px solid #db0000;
+    border-top: 1px solid #db0000;
 }
-#menu #items ul li.write a		{background: url("images/pen.png") 8px 6px no-repeat;}
-#menu #items ul li.read a		{background: url("images/glass.png") 8px 6px no-repeat;}
-#menu #items ul li.settings a	{background: url("images/gear.png") 8px 6px no-repeat;}
-#menu #items ul li.lock a		{background: url("images/lock.png") 10px 6px no-repeat;}
-#menu #items ul li.download a	{background: url("images/download.png") 10px 6px no-repeat;}
+#menu #items ul li.write a      {background: url("images/pen.png") 8px 6px no-repeat;}
+#menu #items ul li.read a       {background: url("images/glass.png") 8px 6px no-repeat;}
+#menu #items ul li.settings a   {background: url("images/gear.png") 8px 6px no-repeat;}
+#menu #items ul li.lock a       {background: url("images/lock.png") 10px 6px no-repeat;}
+#menu #items ul li.download a   {background: url("images/download.png") 10px 6px no-repeat;}
 
 
 #menu #contact{
-	width: 100px;
-	padding: 10px;
-	font-size: 12px;
-	text-align: center;
-	margin-top: 50px;
+    width: 100px;
+    padding: 10px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 50px;
 }
 #menu #contact a{
-	color: #fff;
+    color: #fff;
 }
 #menu #footer{
-	background: url("images/ribbon_02.png") bottom center no-repeat;
-	display: block;
-	height: 130px;
-	width: 140px;
+    background: url("images/ribbon_02.png") bottom center no-repeat;
+    display: block;
+    height: 130px;
+    width: 140px;
+}
+#menu #footer #version{
+    opacity: 0.2;
+    text-shadow: 1px 1px #333;
+    text-align: center;
+    line-height: 14px;
+    font-size: 12px;
 }
 #content{
-	width: 700px;
-	margin: 0 auto;
+    width: 700px;
+    margin: 0 auto;
 }
 
 #unlock{
-	margin: 0 auto;
-	text-align: center;
+    margin: 0 auto;
+    text-align: center;
 }
 #unlock input{
-	font-family: 'Neuton';
-	display: block;
-	width: 250px;
-	height: 40px;
-	font-size: 20px;
-	margin: 5px auto;
-	text-align: center;
-	color: #ccc;
+    font-family: 'Neuton';
+    display: block;
+    width: 250px;
+    height: 40px;
+    font-size: 20px;
+    margin: 5px auto;
+    text-align: center;
+    color: #ccc;
 }
 #unlock input#passwordHolder{
-	margin: 24px auto 10px auto;
-	display: block;
+    margin: 24px auto 10px auto;
+    display: block;
 }
-#unlock input#password{	display: none;}
+#unlock input#password{ display: none;}
 #unlock input[type=submit]{
-	color: #000;
+    color: #000;
 }
 
 textarea#body{
-	width: 700px;
-	height: 200px;
-	font-family: 'Neuton';
+    width: 700px;
+    height: 200px;
+    font-family: 'Neuton';
 }
 
 #jump {
-	text-align: center;
-	border-bottom: 1px solid #aaa;
+    text-align: center;
+    border-bottom: 1px solid #aaa;
 }
 #jump a{
-	color: #333;
-	text-decoration: none;
-	border-left: 1px solid #aaa;
-	display: inline;
-	padding: 0 10px;
+    color: #333;
+    text-decoration: none;
+    border-left: 1px solid #aaa;
+    display: inline;
+    padding: 0 10px;
 }
 #jump a:hover { text-decoration: underline; }
 #jump a.first { border-left: none; }
 
 
 .entry{
-	width: 100%;
-	margin: 8px auto;
-	word-wrap: break-word;
-	display: block;
-	background: #fff;
-	border: 1px solid #aaa;
-	border-radius: 6px;
-	position: relative;
+    width: 100%;
+    margin: 8px auto;
+    word-wrap: break-word;
+    display: block;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    position: relative;
 }
 .entry .bar{
-	display: block;
-	height: 29px;
-	padding: 3px;
-	text-align: center;
-	position: relative;
+    display: block;
+    height: 29px;
+    padding: 4px 3px 2px;
+    text-align: center;
+    position: relative;
 }
 .entry .delete {
-	background: url("images/x_grey.png") bottom center no-repeat;
-	display: none;
-	height: 16px;
-	width: 16px;
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	z-index: 999;
+    background: url("images/x_grey.png") bottom center no-repeat;
+    display: none;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
 }
-.entry .bar:hover {	cursor: pointer; background: url("images/down.png") 10px 10px no-repeat;	}
-.entry.active .bar:hover {	cursor: pointer; background: url("images/up.png") 10px 8px no-repeat;		}
+.entry .bar:hover { cursor: pointer; background: url("images/down.png") 10px 10px no-repeat;    }
+.entry.active .bar:hover {  cursor: pointer; background: url("images/up.png") 10px 8px no-repeat;       }
 .entry .received {
-	color: #ccc;
-	font-size: 12px;
-	float: right;
+    color: #ccc;
+    font-size: 12px;
+    float: right;
 }
 .entry .sent{
 
 }
 .entry .body{
-	display: none;
-	padding: 4px;
-	border-top: 1px solid #efefef;
-	font-size: 14px;
-	line-height: 25px;
-	margin: 0 6px 6px;
+    display: none;
+    padding: 4px;
+    border-top: 1px solid #efefef;
+    font-size: 14px;
+    line-height: 25px;
+    margin: 0 6px 6px;
 }
 .error {
-	background: rgb(255, 0, 0);
-	background: rgba(255, 0, 0, 0.2);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ff0000, endColorstr=#33ff0000);
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ff0000, endColorstr=#33ff0000)";
-	padding: 10px;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	margin: 10px 0;
+    background: rgb(255, 0, 0);
+    background: rgba(255, 0, 0, 0.2);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ff0000, endColorstr=#33ff0000);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#33ff0000, endColorstr=#33ff0000)";
+    padding: 10px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    margin: 10px 0;
 }
 .error h4{
-	text-align: left;
-	font-weight: bold;
-	margin: 0;
-	padding: 0;
+    text-align: left;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 .error p{
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 .success {
-	background: rgb(0, 255, 0);
-	background: rgba(0, 255, 0, 0.2);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3300ff00, endColorstr=#3300ff00);
-	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#3300ff00, endColorstr=#3300ff00)";
-	padding: 10px;
-	border-radius: 10px;
-	-moz-border-radius: 10px;
-	-webkit-border-radius: 10px;
-	margin: 10px 0;
+    background: rgb(0, 255, 0);
+    background: rgba(0, 255, 0, 0.2);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3300ff00, endColorstr=#3300ff00);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#3300ff00, endColorstr=#3300ff00)";
+    padding: 10px;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    margin: 10px 0;
 }
 .success h4{
-	text-align: left;
-	font-weight: bold;
-	margin: 0;
-	padding: 0;
+    text-align: left;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 .success p{
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
+

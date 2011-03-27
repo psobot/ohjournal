@@ -3,13 +3,15 @@
 	require_once("helpers.php");
 	class NotInstalledException extends Exception {}
 
+	$version = "0.5";
+
 	class Journal{
 		public $db = null;
 		public $installed = false;
 		public $config = null;
 		public $entries = null;
 		public $dbFile = null;
-
+		
 		function __construct($database = NULL){
 			if($database == NULL) $database = dirname(__FILE__)."/"."journal.db";
 			$this->dbFile = $database;
