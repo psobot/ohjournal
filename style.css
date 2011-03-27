@@ -181,7 +181,7 @@ textarea#body{
 .entry .bar{
 	display: block;
 	height: 29px;
-	padding: 4px 3px 2px;
+	padding: 3px;
 	text-align: center;
 	position: relative;
 }
