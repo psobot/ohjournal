@@ -12,7 +12,9 @@
 		<link href='favicon.png' rel="icon" type="image/png" />
 		<link href='apple-touch-icon.png' rel="apple-touch-icon" />
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
-		<script type="text/javascript" src="dynamic.js"></script>
+		<script type="text/javascript" src="js/ohjournal.js"></script>
+		<script type="text/javascript" src="js/highcharts.js"></script>
+		<script type="text/javascript" src="js/stats.js"></script>
 	</head>
 	<body>
 		<div id="menu">
@@ -24,6 +26,7 @@
 						<?php if($j->config->webRead){ ?><li class="read"><a href="./read">read</a></li><?php } ?>
 						<li class="write"><a href="./write">write</a></li>
 						<li class="settings"><a href="./manage">manage</a></li>
+						<?php if($j->config->webRead){ ?><li class="read"><a href="./stats">stats</a></li><?php } ?>
 						<li class="lock"><a href="./lock">lock</a></li>
 						<?php } ?>
 					</ul>

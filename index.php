@@ -23,6 +23,9 @@
 			case "write":
 				require_once("write.php");
 				break;
+			case "stats":
+				require_once("stats.php");
+				break;
 			case NULL:
 				if($j->config->webRead) require_once("read.php");
 				else require_once("write.php");
