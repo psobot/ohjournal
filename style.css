@@ -112,13 +112,6 @@ a:hover {
 	height: 130px;
 	width: 140px;
 }
-#menu #footer #version{
-	opacity: 0.2;
-	text-shadow: 1px 1px #333;
-	text-align: center;
-	line-height: 14px;
-	font-size: 12px;
-}
 #content{
 	width: 700px;
 	margin: 0 auto;

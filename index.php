@@ -8,12 +8,7 @@
 		header("Location: ./install");
 	} else if(	$j->isAllowedIP($_SERVER['REMOTE_ADDR']) 
 			&& ($j->isLoggedIn() || (isset($_POST['password']) && $j->login($_POST['password'])))){
-		if(isset($_GET['url'])) $page = strtolower($_GET['url']);	//Get page from Apache .htaccess redirect
-		else {
-			$uricomponents = explode("/", $_SERVER['REQUEST_URI']);	//otherwise (lighttpd) use index.php as custom 404 handler
-			$page = $uricomponents[count($uricomponents)-1];		//get last component of URL
-		}
-		switch($page){
+		switch(strtolower($_GET['url'])){
 			case "lock":
 				require_once("lock.php");
 				break;
@@ -22,9 +17,6 @@
 				break;
 			case "write":
 				require_once("write.php");
-				break;
-			case "stats":
-				require_once("stats.php");
 				break;
 			case NULL:
 				if($j->config->webRead) require_once("read.php");

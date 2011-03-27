@@ -1,10 +1,9 @@
 <?php
-	$version = 0.5;
 	session_start();
 	require_once("helpers.php");
+	class NotInstalledException extends Exception {}
 
 	class Journal{
-		
 		public $db = null;
 		public $installed = false;
 		public $config = null;
