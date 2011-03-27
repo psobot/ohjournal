@@ -23,6 +23,7 @@
 						<?php if($j->isLoggedIn()){ ?>
 						<?php if($j->config->webRead){ ?><li class="read"><a href="./read">read</a></li><?php } ?>
 						<li class="write"><a href="./write">write</a></li>
+						<?php if($j->config->webRead){ ?><li class="read"><a href="./stats">stats</a></li><?php } ?>
 						<li class="settings"><a href="./manage">manage</a></li>
 						<li class="lock"><a href="./lock">lock</a></li>
 						<?php } ?>
@@ -30,7 +31,11 @@
 				</div>
 				<div id="contact">developed by <a href="http://www.petersobot.com">Peter Sobot</a></div>
 			</div>
-			<div id="footer"></div>
+			<div id="footer">
+				<div id="version">
+					version	<?php echo $version; ?>
+				</div>
+			</div>
 		</div>
 		<div id="content">
 

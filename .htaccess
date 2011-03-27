@@ -3,9 +3,10 @@
     Deny from all
     Satisfy All
 </Files>
-<IfModule mod_rewrite.c>
-	RewriteEngine on
-	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
-</IfModule>
+#<IfModule mod_rewrite.c>
+#	RewriteEngine on
+#	RewriteCond %{REQUEST_FILENAME} !-d
+#	RewriteCond %{REQUEST_FILENAME} !-f
+#	RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+#</IfModule>
+ErrorDocument 404 /journal.petersobot.com/index.php
