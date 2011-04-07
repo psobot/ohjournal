@@ -210,7 +210,7 @@
 
 			//On Jan 24, 2011, at 8:00 PM, OhJournal wrote:
 			preg_match("%^([\s\S]+?)On (.+?), at (.+?), OhJournal%", $body, $parts);	//Parse send date & time from reply line
-			$sendDate = strtotime($parts[2]." ".$sendDate[3]);
+			$sendDate = strtotime($parts[2]." ".$parts[3]);
 			
 			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($parts[1]))));
 
