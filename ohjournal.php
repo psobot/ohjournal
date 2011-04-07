@@ -209,11 +209,10 @@
 			$receiveDate = strtotime($date[1]);
 
 			//On Jan 24, 2011, at 8:00 PM, OhJournal wrote:
-			preg_match("%On (.+?), at (.+?), OhJournal%", $body, $sendDate);	//Parse send date & time from reply line
-			$sendDate = strtotime($sendDate[1]." ".$sendDate[2]);
-
-			preg_match("%^([\s\S]+?)On .+? \d\d?, \d{4}, at %", $body, $body);	//Remove previous email from what's being saved
-			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($body[1]))));
+			preg_match("%^([\s\S]+?)On (.+?), at (.+?), OhJournal%", $body, $parts);	//Parse send date & time from reply line
+			$sendDate = strtotime($parts[2]." ".$sendDate[3]);
+			
+			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($parts[1]))));
 
 			return array($sendDate, $receiveDate, $header, $body);
 		}
