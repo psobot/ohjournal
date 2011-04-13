@@ -193,7 +193,7 @@
 			$r = array(	"\.", 	"\+"	);
 			$m = preg_match("/^(From ".preg_quote($this->responseEmail()).".+)(^From )?/ms", $raw, $matches);
 			if($m)	return trim($matches[1]);
-			else return null;
+			else return false;
 		}
 
 		/*
@@ -212,7 +212,7 @@
 			preg_match("%^([\s\S]+?)On (.+?), at (.+?), OhJournal%", $body, $parts);	//Parse send date & time from reply line
 			$sendDate = strtotime($parts[2]." ".$parts[3]);
 			
-			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($parts[1]))));
+			$body = preg_replace('%(\S)\n(\S)%', '\1 \2', trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($parts[1])))));
 
 			return array($sendDate, $receiveDate, $header, $body);
 		}
