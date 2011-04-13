@@ -212,7 +212,9 @@
 			preg_match("%^([\s\S]+?)On (.+?), at (.+?), OhJournal%", $body, $parts);	//Parse send date & time from reply line
 			$sendDate = strtotime($parts[2]." ".$parts[3]);
 			
-			$body = preg_replace('%(\S)\n(\S)%', '\1 \2', trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($parts[1])))));
+			//should implement this as a config variable - this removes hard wrapping, but also removes a lot of newlines
+			//$body = preg_replace('%(\S)\n(\S)%', '\1 \2', trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($parts[1])))));
+			$body = trim(quoted_printable_decode(preg_replace("/=[\n\r]+/", "", trim($parts[1]))));
 
 			return array($sendDate, $receiveDate, $header, $body);
 		}
