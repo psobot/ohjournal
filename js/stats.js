@@ -69,6 +69,9 @@ $(document).ready(function() {
       series: [{
 	  		name: "Rating",
 			data: ratings,
+            marker: {
+                enabled: false
+            },
             point: {
                 events: {
                     click: function() {
@@ -111,6 +114,9 @@ $(document).ready(function() {
       series: [{
 	  		name: "Words written",
 			data: lengths,
+            marker: {
+                enabled: false
+            },
             point: {
                 events: {
                     click: function() {
