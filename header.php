@@ -16,7 +16,7 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/ohjournal.js"></script>
 		<script type="text/javascript" src="js/highcharts.js"></script>
-		<script type="text/javascript" src="js/stats.js"></script>
+		<?php if($page == 'stats'): ?><script type="text/javascript" src="js/stats.js"></script><?php endif; ?>
 	</head>
 	<body>
 		<div id="menu">
