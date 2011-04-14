@@ -35,6 +35,49 @@ $(document).ready(function() {
          data: frequency 
       }]
    });
+	ratings = new Highcharts.Chart({
+      chart: {
+         renderTo: 'ratings',
+		 zoomType: 'x',
+         defaultSeriesType: 'line',
+      },
+      title: {
+         text: 'Rating of Entries',
+      },
+	  legend: {enabled: false},
+      yAxis: {
+         title: {
+            text: 'Rating'
+         },
+		 min: -100,
+		 max: 100,
+         plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+         }]
+      },
+	  xAxis: {
+	  	type: "datetime",
+		maxZoom: 14 * 24 * 3600000
+	  },
+	  tooltip:{
+		formatter: function(){
+			return "<strong>"+this.y+"%</strong> on "+Highcharts.dateFormat("%b %e, %Y", this.x);
+		}
+	  },
+      series: [{
+	  		name: "Rating",
+			data: ratings,
+            point: {
+                events: {
+                    click: function() {
+                        location.href = "read#"+Highcharts.dateFormat("%Y-%m-%d", this.x);
+                    }
+                }
+            }			
+		}]
+   });
 	length = new Highcharts.Chart({
       chart: {
          renderTo: 'length',

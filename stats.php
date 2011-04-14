@@ -21,6 +21,7 @@
 			foreach($entries as $k => $entry){
 				$dateParts = explode("-", $day);
 				$lengths["Date.UTC(".($dateParts[0]).", ".($dateParts[1]-1).", ".($dateParts[2]).")"] = count(explode(" ", $entry['entry']));
+				$ratings["Date.UTC(".($dateParts[0]).", ".($dateParts[1]-1).", ".($dateParts[2]).")"] = $entry['mood'];
 				foreach(explode(" ", $entry['entry']) as $word){
 					$word = strtolower(preg_replace('/[^a-zA-Z0-9 ]/','',$word));	//remove non-alphanumeric chars
 					$words[$word]++;			//increment histogram
@@ -39,8 +40,10 @@
 <script type="text/javascript">
 	var frequency = <?php echo json_encode(array_values($topTwenty)); ?>;
 	var lengths = [<?php foreach($lengths as $k => $v) echo "[$k, $v],"; ?>];
+	var ratings = [<?php foreach($ratings as $k => $v) echo "[$k, $v],"; ?>];
 	var entriesPerMonth = [<?php foreach($entriesPerMonth as $v) echo "{x: ".$v['x'].", y: ".$v['y'].", possible: ".$v['possible']."},"; ?>];
 </script>
+<div id="ratings" class="chart"></div>
 <div id="length" class="chart"></div>
 <div id="entriesPerMonth" class="chart"></div>
 <div id="frequency" class="chart"></div>
