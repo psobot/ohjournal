@@ -14,6 +14,31 @@ $(document).ready(function(){
 		$('html, body').animate({scrollTop:target_top}, 750, "easeInOutQuad");
 	});
 
+	$(".slider").slider({
+		max: 100,
+		min: -100,
+		stop: function(event, ui) {
+			$.post(
+				"rate",
+				{
+					rating: ui.value,
+					date: $(this).parent().parent().attr('id').split("_")[1]
+				},
+				function(data) {
+					if(data == "false"){
+						alert("Something didn't work. Sorry.");	//fix later, tired
+					}
+				}
+			);
+		},
+		slide: function(event, ui) {
+			$(this).siblings("span.percent").html(ui.value);
+		}
+	});
+	$(".slider").each(function(i,e){
+		$(e).slider( "value", $(e).attr("value") );
+	});
+
 	$(".bar").click(function(e){
 		e.preventDefault();
 		$(this).siblings(".body").slideToggle();

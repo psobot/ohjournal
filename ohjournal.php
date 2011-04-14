@@ -124,13 +124,27 @@
 		 */
 		public function submitEntry($sendDate, $receiveDate, $header, $body){
 			$stmt = $this->db->prepare('insert into '.$this->config->tblEntries.' 
-										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0)');
+										values(NULL, datetime(:send, "unixepoch"), datetime(:receive, "unixepoch"), :header, :body, 0, :mood)');
 			$stmt->bindValue(':send', $sendDate);
 			$stmt->bindValue(':receive', $receiveDate);
 			$stmt->bindValue(':header', htmlentities($header));
 			$stmt->bindValue(':body', htmlentities($body));
+			$stmt->bindValue(':mood', 0);	//for now
 			return $stmt->execute();
 		}
+
+		/*
+		 *	Adds a mood rating to a journal entry.
+		 *
+		 */
+		public function rateEntry($id, $mood){
+			$stmt = $this->db->prepare('update '.$this->config->tblEntries.' 
+										set mood = :mood where id = :id');
+			$stmt->bindValue(':id', $id);
+			$stmt->bindValue(':mood', $mood);
+			return $stmt->execute();
+		}
+
 
 		/*
 		 *	Gets a random journal entry that hasn't been reflected at the user yet.

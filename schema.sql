@@ -18,6 +18,6 @@ INSERT INTO 'config' ('id', 'name', 'value') VALUES ('14', 'webDate', 'l, F j<su
 INSERT INTO 'config' ('id', 'name', 'value') VALUES ('15', 'tblIPs', 'IPs');
 INSERT INTO 'config' ('id', 'name', 'value') VALUES ('16', 'timezone', '');
 
-CREATE TABLE entries(id integer primary key autoincrement, sent datetime, received datetime, headers varchar(8192), entry varchar(8192), reflected int);
+CREATE TABLE entries(id integer primary key autoincrement, sent datetime, received datetime, headers varchar(8192), entry varchar(8192), reflected int, mood real default 0);
 CREATE TABLE user (username varchar(50), password varchar(50), cookie varchar(50));
 CREATE TABLE visits (id integer primary key autoincrement, time datetime, ip varchar(255), page varchar(255), loggedin int);

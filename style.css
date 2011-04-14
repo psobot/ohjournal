@@ -261,3 +261,18 @@ textarea#body{
 .chart{
 	margin: 10px 0;
 }
+.sliderContainer{
+	border-top: 1px solid #efefef;
+	margin: 20px 10px 10px;
+	padding-top: 10px;
+	position: relative;
+}
+.sliderContainer .percent{
+	margin-left: 20px;
+}
+.slider{
+	width: 78%;
+	position: absolute;
+	top: 18px;
+	right: 10px;
+}

@@ -8,10 +8,12 @@
 			<?php echo ( $title == "" ) ? "" : " | $title"; ?>
 		</title>
 		<link href='http://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css' />
+		<link href='js/ui-lightness/jquery-ui-1.8.11.custom.css' rel='stylesheet' type='text/css' />
 		<link href='style.css' rel='stylesheet' type='text/css' />
 		<link href='favicon.png' rel="icon" type="image/png" />
 		<link href='apple-touch-icon.png' rel="apple-touch-icon" />
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.min.js"></script>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 		<script type="text/javascript" src="js/ohjournal.js"></script>
 		<script type="text/javascript" src="js/highcharts.js"></script>
 		<script type="text/javascript" src="js/stats.js"></script>

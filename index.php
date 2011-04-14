@@ -23,6 +23,9 @@
 			case "write":
 				require_once("write.php");
 				break;
+			case "rate":
+				require_once("rate.php");
+				break;
 			case "stats":
 				require_once("stats.php");
 				break;

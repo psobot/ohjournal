@@ -11,7 +11,7 @@
 <h3 class="percent">
 	<?php echo $a = $j->countDays(); ?> 
 	entr<?php echo ($a>1)?"ies":"y"; ?> over 
-	<?php echo $b = $j->countTotalDays(); ?> day<?php echo (($b>1)?"s":""); ?>. 
+	<?php echo $b = $j->countTotalDays(); ?> day<?php echo (($b>1)?"s":""); ?> (<?php echo count(array_keys($data)); ?> months). 
 	(<?php echo intval($a/$b * 100); ?>%)
 </h3>
 <div id="jump">
@@ -43,7 +43,7 @@
 			$row['sent'] .= " GMT";
 			$body = trim(preg_replace("/[\n]/", "<br />", $row['entry']));
 	?>
-			<div class="body">
+			<div class="body" id="entry_<?php echo $row['id'] ?>">
 					<div class="received">
 					<?php 
 						if(DateCompare::daysApart($row['received'], $row['sent']) == 0) echo date("g:i a", strtotime($row['received']));
@@ -54,6 +54,7 @@
 				<?php
 					echo $body; 
 				?>
+			<div class="sliderContainer">Rating: <span class="percent"><?php echo $row['mood']; ?></span>% <div class="slider" value="<?php echo $row['mood']; ?>"></div></div>
 			</div>
 	<?php
 		}
