@@ -8,7 +8,7 @@ $(document).ready(function() {
          plotShadow: false
       },
       title: {
-         text: 'Top twenty words'
+         text: 'Most-used words (longer than 5 letters)'
       },
       tooltip: {
 		   formatter: function() {

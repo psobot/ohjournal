@@ -24,9 +24,11 @@
 				$ratings["Date.UTC(".($dateParts[0]).", ".($dateParts[1]-1).", ".($dateParts[2]).")"] = $entry['mood'];
 				foreach(explode(" ", $entry['entry']) as $word){
 					$word = strtolower(preg_replace('/[^a-zA-Z0-9 ]/','',$word));	//remove non-alphanumeric chars
-					$words[$word]++;			//increment histogram
-					$wordCount++;				//increment wordcount
-					$charCount+=strlen($word);	//increment charcount
+					if(strlen($word) >= 5){
+						$words[$word]++;			//increment histogram
+						$wordCount++;				//increment wordcount
+						$charCount+=strlen($word);	//increment charcount
+					}
 				}	
 			}
 		}
